@@ -1,2 +1,7 @@
 packages:
   - "packages/*"
+
+# Supply-chain cooldown: reject dependency versions published less than 14 days
+# ago, so a freshly-compromised release can't slip into the lockfile. Pins below
+# this age must wait. See docs/status.md (Toolchain).
+minimumReleaseAge: 20160 # minutes (14 days)

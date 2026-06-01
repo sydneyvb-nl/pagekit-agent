@@ -43,7 +43,11 @@ Do not claim these work. They are scaffolded as docs/roadmap only:
 
 - **Node** ≥ 22 (Node 24 LTS recommended; CI runs Node 24)
 - **pnpm** ≥ 11 (pinned via `packageManager`; provided by Corepack)
-- **TypeScript** 6 · **Zod** 4 · **Vitest** 4 · **yaml** 2
+- **TypeScript** 6 · **Zod** 4 · **Vitest** 4 (+ Vite 7) · **yaml** 2
+- **Supply-chain cooldown.** `pnpm-workspace.yaml` sets `minimumReleaseAge` to
+  14 days: dependency versions published more recently than that are rejected at
+  install time, so a freshly-compromised release can't enter the lockfile. Deps
+  are pinned to the newest versions that clear this window.
 
 ## Quality bar right now
 
