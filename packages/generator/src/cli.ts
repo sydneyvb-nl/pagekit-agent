@@ -15,9 +15,9 @@ function main(argv: string[]): number {
   const [command, ...rest] = argv;
   switch (command) {
     case "validate":
-      return cmdValidate(rest[0]);
+      return cmdValidate(firstPositional(rest));
     case "plan":
-      return cmdPlan(rest[0], rest.includes("--dry-run"));
+      return cmdPlan(firstPositional(rest), rest.includes("--dry-run"));
     case "inspect-vertical":
       return cmdInspectVertical(rest[0]);
     case undefined:
@@ -97,6 +97,11 @@ function cmdInspectVertical(id?: string): number {
   const data = parseYaml(readFileSync(file, "utf8"));
   console.log(JSON.stringify(data, null, 2));
   return 0;
+}
+
+/** First non-flag argument, so `plan --dry-run` doesn't treat the flag as a path. */
+function firstPositional(args: string[]): string | undefined {
+  return args.find((a) => !a.startsWith("-"));
 }
 
 function resolveBriefPath(input?: string): string {
