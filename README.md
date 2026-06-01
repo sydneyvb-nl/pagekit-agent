@@ -44,7 +44,7 @@ metadata — plus a set of reports that explain every decision and every gap.
 
 ## Quickstart
 
-Requires Node ≥ 20 and pnpm ≥ 9 (`corepack enable`).
+Requires Node ≥ 22 (Node 24 LTS recommended) and pnpm ≥ 11 (`corepack enable`).
 
 ```bash
 pnpm install
@@ -87,9 +87,20 @@ examples/                  # example briefs and generated output
 
 **v0.1 — foundation.** Implemented today: brief validation, vertical
 resolution, deterministic site planning, internal-link graph, structural
-quality gates, and the report set. See [`docs/roadmap.md`](docs/roadmap.md) for
-what's next (Astro rendering, SEO/schema emission, accessibility runners,
-Webstudio handoff, example sites).
+quality gates, and the report set. Not yet built: Astro rendering, SEO/schema
+emission, accessibility runners, Webstudio handoff, full example sites.
+
+See [`docs/status.md`](docs/status.md) for the authoritative built-vs-planned
+list and [`docs/roadmap.md`](docs/roadmap.md) for the phased plan.
+
+## Documentation
+
+[`docs/README.md`](docs/README.md) is the documentation map. If you're an LLM
+agent, start at [`AGENTS.md`](AGENTS.md) — it routes you through the docs in the
+order you need them. Core reading: working
+[principles](docs/principles.md) · [architecture](docs/architecture.md) ·
+[generation protocol](docs/site-generation-protocol.md) ·
+[quality gates](docs/quality-gates.md).
 
 ## Recommended foundation & licensing
 

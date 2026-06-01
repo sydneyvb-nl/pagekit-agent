@@ -13,7 +13,8 @@ pnpm test                # run the test suite
 pnpm plan --dry-run      # plan the example brief without writing files
 ```
 
-Node ≥ 20, pnpm ≥ 9.
+Node ≥ 22 (Node 24 LTS recommended), pnpm ≥ 11. Corepack reads the pinned
+`packageManager` version from `package.json`, so you don't install pnpm manually.
 
 ## Ground rules
 

@@ -1,7 +1,11 @@
 # Roadmap
 
 Status of the phased build from the product PRD. This kickoff delivers the
-foundation and the first deterministic slice (brief → plan → reports).
+foundation and the first deterministic slice (brief → plan → reports). For the
+plain built-vs-planned snapshot, see [status.md](status.md).
+
+Toolchain: Node ≥ 22 (CI on Node 24 LTS), pnpm ≥ 11, TypeScript 6, Zod 4,
+Vitest 4.
 
 Legend: ✅ done · 🟡 partial · ⏳ planned
 

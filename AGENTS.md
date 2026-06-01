@@ -5,6 +5,25 @@ brief. This repository is designed for you, an LLM agent, as the primary user.
 Everything here is meant to be executed deterministically, not interpreted
 loosely.
 
+## ⚠️ Read this before you touch anything
+
+This repo only behaves predictably if you read the docs first. Do **not** start
+generating, editing files, or running commands until you have read, in order:
+
+1. **This file (`AGENTS.md`)** — the operating rules. Non-negotiable.
+2. **[`docs/principles.md`](docs/principles.md)** — the five working principles
+   every decision must satisfy.
+3. **[`docs/architecture.md`](docs/architecture.md)** — the pipeline and where
+   each responsibility lives.
+4. **[`docs/site-generation-protocol.md`](docs/site-generation-protocol.md)** —
+   the exact step-by-step procedure for a generation run.
+5. **[`docs/quality-gates.md`](docs/quality-gates.md)** — what blocks a build vs.
+   what only warns.
+
+[`docs/README.md`](docs/README.md) is the full documentation map. If you are
+about to do something not covered by a doc or a skill, stop and say so rather
+than improvising — improvisation is a defect in this system, not initiative.
+
 ## Golden rules
 
 1. **Do not ask questions** unless a required field is missing _and_ no safe
@@ -58,8 +77,12 @@ Written to `generated/`:
 
 | You need…                        | Read…                                  |
 | -------------------------------- | -------------------------------------- |
+| The full documentation map       | `docs/README.md`                       |
+| The working principles           | `docs/principles.md`                   |
+| The architecture / pipeline      | `docs/architecture.md`                 |
 | The end-to-end protocol          | `docs/site-generation-protocol.md`     |
 | What blocks a build vs. warns    | `docs/quality-gates.md`                |
+| What is / isn't built yet        | `docs/status.md`                       |
 | How a page is structured         | `packages/generator/src/plan/blueprints.ts` |
 | Vertical-specific cautions       | `verticals/<id>/vertical.yaml`         |
 | Content safety rules             | `content-rules/`                       |
@@ -70,6 +93,7 @@ Written to `generated/`:
 The generator implemented today covers: brief validation, vertical resolution,
 deterministic site planning, the internal-link graph, structural quality gates,
 and the report set. Astro rendering, SEO/schema emission, accessibility runners,
-and the Webstudio handoff are scaffolded in the roadmap (`docs/roadmap.md`) and
-not yet implemented. Do not claim a site is "built and deployed" — claim exactly
-what the gates you ran actually verified.
+and the Webstudio handoff are **not yet implemented** — see `docs/status.md` for
+the authoritative built-vs-planned list and `docs/roadmap.md` for the phased
+plan. Do not claim a site is "built and deployed" — claim exactly what the gates
+you ran actually verified.

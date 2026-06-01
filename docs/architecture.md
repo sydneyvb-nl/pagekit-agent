@@ -40,10 +40,12 @@ those change the contract above; they consume the same `SitePlan`.
 
 ## Design principles
 
-1. **Agent-first, human-readable second.** Every instruction is executable.
-2. **Deterministic outputs.** Structure is fixed; copy is creative-but-constrained.
-3. **No silent magic.** Reports explain every decision and gap.
-4. **Easy to extend.** New verticals are config, not code.
-5. **Safe by default.** The system never invents unverifiable claims.
+The architecture exists to enforce five working principles — agent-first,
+deterministic structure, no silent magic, config-driven extension, and safe-by-
+default. Each is defined with examples and its enforcement point in
+[`principles.md`](principles.md).
 
-See [`roadmap.md`](roadmap.md) for the phased build plan and current status.
+## Status & roadmap
+
+See [`status.md`](status.md) for what is built today and [`roadmap.md`](roadmap.md)
+for the phased plan mapped to the PRD.

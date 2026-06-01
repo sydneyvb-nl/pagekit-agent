@@ -49,9 +49,9 @@ const nonEmpty = z.string().trim().min(1);
 
 export const ContactSchema = z.object({
   phone: nonEmpty.nullish(),
-  email: z.string().email().nullish(),
+  email: z.email().nullish(),
   address: nonEmpty.nullish(),
-  booking_url: z.string().url().nullish(),
+  booking_url: z.url().nullish(),
 });
 
 export const BrandSchema = z.object({
