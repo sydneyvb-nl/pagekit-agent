@@ -14,3 +14,8 @@ overrides:
   postcss: 8.5.14
   tinyexec: 1.1.2
   tinyglobby: 0.2.16
+
+# pnpm 11 blocks dependency build scripts by default. esbuild (pulled by Vite/
+# Vitest) needs its postinstall to fetch its platform binary; approve only that.
+onlyBuiltDependencies:
+  - esbuild
