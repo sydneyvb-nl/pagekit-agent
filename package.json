@@ -25,5 +25,11 @@
     "seo",
     "astro",
     "webstudio"
-  ]
+  ],
+  "pnpm": {
+    "overrides": {
+      "rollup": "4.60.4"
+    },
+    "overridesComment": "Pin rollup (Vite's bundler) to a build that clears the 14-day minimumReleaseAge cooldown; the floating ^4 range otherwise resolves to a same-day rollup release."
+  }
 }
