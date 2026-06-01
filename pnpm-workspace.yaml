@@ -17,5 +17,6 @@ overrides:
 
 # pnpm 11 blocks dependency build scripts by default. esbuild (pulled by Vite/
 # Vitest) needs its postinstall to fetch its platform binary; approve only that.
-onlyBuiltDependencies:
-  - esbuild
+# (pnpm 11 replaced onlyBuiltDependencies with the allowBuilds map.)
+allowBuilds:
+  esbuild: true
