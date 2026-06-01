@@ -25,14 +25,5 @@
     "seo",
     "astro",
     "webstudio"
-  ],
-  "pnpm": {
-    "overrides": {
-      "rollup": "4.60.4",
-      "postcss": "8.5.14",
-      "tinyexec": "1.1.2",
-      "tinyglobby": "0.2.16"
-    },
-    "overridesComment": "Pin transitive deps (Vite/Vitest's bundler + helpers) to builds that clear the 14-day minimumReleaseAge cooldown; their floating ranges otherwise resolve to very recent releases."
-  }
+  ]
 }

@@ -5,3 +5,12 @@ packages:
 # ago, so a freshly-compromised release can't slip into the lockfile. Pins below
 # this age must wait. See docs/status.md (Toolchain).
 minimumReleaseAge: 20160 # minutes (14 days)
+
+# Pin floating transitives (Vite/Vitest's bundler + helpers) to builds that
+# clear the cooldown above; their default ranges otherwise resolve to brand-new
+# releases. pnpm 11 reads overrides from here, not from package.json.
+overrides:
+  rollup: 4.60.4
+  postcss: 8.5.14
+  tinyexec: 1.1.2
+  tinyglobby: 0.2.16
