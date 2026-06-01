@@ -1,0 +1,19 @@
+id: restaurant
+label: Restaurant / Lunchroom
+regulated: false
+recommended_theme: modern-restaurant
+schema_default: Restaurant
+primary_goal_options:
+  - visits
+  - bookings
+  - contact_requests
+required_pages:
+  - home
+  - services
+  - about
+  - location
+  - contact
+  - faq
+content_cautions:
+  - "Do not invent menu items, prices or opening hours."
+  - "Mark menu and hours as TODO when not provided."

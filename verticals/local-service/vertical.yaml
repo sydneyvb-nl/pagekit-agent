@@ -1,0 +1,19 @@
+id: local-service
+label: Local Service Business
+regulated: false
+recommended_theme: calm-service
+schema_default: LocalBusiness
+primary_goal_options:
+  - contact_requests
+  - phone_calls
+  - bookings
+required_pages:
+  - home
+  - services
+  - service
+  - about
+  - contact
+  - faq
+content_cautions:
+  - "Do not invent certifications, awards, reviews or pricing."
+  - "Use placeholders or TODO markers for any unverified claim."

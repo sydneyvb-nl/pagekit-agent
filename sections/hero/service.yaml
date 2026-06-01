@@ -1,0 +1,16 @@
+id: hero.service
+purpose: "Open a service page with a clear, local, action-oriented header."
+required_props:
+  eyebrow: string
+  heading: string
+  subheading: string
+  primary_cta_label: string
+  primary_cta_href: string
+accessibility:
+  heading_level: h1
+  image_alt_required: true
+seo_notes:
+  - "Heading should contain the service name and the city once."
+agent_rules:
+  - "Do not promise outcomes or recovery times."
+  - "Do not state prices unless the brief provides them."

@@ -1,0 +1,18 @@
+id: legal_consultant
+label: Legal / Administrative Consultant
+regulated: true
+recommended_theme: premium-consulting
+schema_default: ProfessionalService
+primary_goal_options:
+  - contact_requests
+  - phone_calls
+required_pages:
+  - home
+  - services
+  - service
+  - about
+  - contact
+  - faq
+content_cautions:
+  - "Do not give or imply specific legal advice or guarantees of outcome."
+  - "Do not claim bar membership, certifications or case results unless provided."

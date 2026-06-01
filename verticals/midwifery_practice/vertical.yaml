@@ -1,0 +1,24 @@
+id: midwifery_practice
+label: Midwifery Practice
+regulated: true
+recommended_theme: warm-family-practice
+schema_default: MedicalBusiness
+primary_goal_options:
+  - registrations
+  - contact_requests
+  - phone_calls
+required_pages:
+  - home
+  - services
+  - service
+  - about
+  - team
+  - location
+  - contact
+  - faq
+content_cautions:
+  - "Do not make medical guarantees or outcome promises."
+  - "Do not replace or imply replacement of professional medical advice."
+  - "Use reassuring but precise, non-alarming language."
+  - "Do not request sensitive medical details in the generic contact form."
+  - "Only use MedicalBusiness schema; do not claim Physician/Hospital subtypes."

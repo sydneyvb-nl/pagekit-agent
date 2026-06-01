@@ -1,0 +1,15 @@
+id: faq
+purpose: "Answer common questions to reduce friction and capture long-tail SEO."
+required_props:
+  heading: string
+  items:
+    - question: string
+      answer: string
+accessibility:
+  heading_level: h2
+  image_alt_required: false
+seo_notes:
+  - "Drives FAQPage schema; questions should match real search phrasing."
+agent_rules:
+  - "Answers must be factual and within the vertical's content cautions."
+  - "Do not answer with guarantees, prices, or claims absent from the brief."

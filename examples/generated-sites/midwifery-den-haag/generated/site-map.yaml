@@ -1,0 +1,130 @@
+business: Verloskundigenpraktijk Example
+vertical: midwifery_practice
+theme: warm-family-practice
+language: nl
+pages:
+  - route: /
+    type: home
+    title: Verloskundigenpraktijk Example | Den Haag
+    schema:
+      - MedicalBusiness
+      - WebSite
+      - Organization
+    internal_links:
+      - /diensten/zwangerschapscontroles/
+      - /diensten/echo-s/
+      - /diensten/kraamzorg/
+      - /contact/
+  - route: /diensten/
+    type: services
+    title: Diensten | Verloskundigenpraktijk Example
+    schema:
+      - MedicalBusiness
+      - BreadcrumbList
+    internal_links:
+      - /
+      - /diensten/
+      - /contact/
+  - route: /over-ons/
+    type: about
+    title: Over ons | Verloskundigenpraktijk Example
+    schema:
+      - MedicalBusiness
+      - BreadcrumbList
+    internal_links:
+      - /
+      - /diensten/
+      - /contact/
+  - route: /team/
+    type: team
+    title: Team | Verloskundigenpraktijk Example
+    schema:
+      - MedicalBusiness
+      - BreadcrumbList
+    internal_links:
+      - /
+      - /diensten/
+      - /contact/
+  - route: /locatie/
+    type: location
+    title: Locatie & route | Verloskundigenpraktijk Example
+    schema:
+      - MedicalBusiness
+      - BreadcrumbList
+    internal_links:
+      - /
+      - /diensten/
+      - /contact/
+  - route: /contact/
+    type: contact
+    title: Contact | Verloskundigenpraktijk Example
+    schema:
+      - MedicalBusiness
+      - ContactPoint
+      - BreadcrumbList
+    internal_links:
+      - /
+      - /diensten/
+  - route: /veelgestelde-vragen/
+    type: faq
+    title: Veelgestelde vragen | Verloskundigenpraktijk Example
+    schema:
+      - FAQPage
+      - BreadcrumbList
+    internal_links:
+      - /
+      - /diensten/
+      - /contact/
+  - route: /privacy/
+    type: privacy
+    title: Privacyverklaring | Verloskundigenpraktijk Example
+    schema:
+      - BreadcrumbList
+    internal_links: []
+  - route: /404/
+    type: "404"
+    title: Pagina niet gevonden | Verloskundigenpraktijk Example
+    schema: []
+    internal_links: []
+  - route: /cookies/
+    type: cookies
+    title: Cookiebeleid | Verloskundigenpraktijk Example
+    schema:
+      - BreadcrumbList
+    internal_links: []
+  - route: /diensten/zwangerschapscontroles/
+    type: service
+    title: Zwangerschapscontroles in Den Haag | Verloskundigenpraktijk Example
+    schema:
+      - Service
+      - MedicalBusiness
+      - BreadcrumbList
+    internal_links:
+      - /diensten/
+      - /diensten/echo-s/
+      - /diensten/kraamzorg/
+      - /contact/
+  - route: /diensten/echo-s/
+    type: service
+    title: Echo's in Den Haag | Verloskundigenpraktijk Example
+    schema:
+      - Service
+      - MedicalBusiness
+      - BreadcrumbList
+    internal_links:
+      - /diensten/
+      - /diensten/zwangerschapscontroles/
+      - /diensten/kraamzorg/
+      - /contact/
+  - route: /diensten/kraamzorg/
+    type: service
+    title: Kraamzorg in Den Haag | Verloskundigenpraktijk Example
+    schema:
+      - Service
+      - MedicalBusiness
+      - BreadcrumbList
+    internal_links:
+      - /diensten/
+      - /diensten/zwangerschapscontroles/
+      - /diensten/echo-s/
+      - /contact/

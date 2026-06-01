@@ -1,0 +1,43 @@
+# Example business brief — midwifery practice in Den Haag.
+# Copy this file, fill in your own business details, and run:
+#   pnpm validate:brief input/business-brief.yaml
+#   pnpm plan input/business-brief.yaml
+business:
+  name: "Verloskundigenpraktijk Example"
+  type: "midwifery_practice"
+  country: "nl"
+  city: "Den Haag"
+  language: "nl"
+  primary_goal: "registrations"
+  short_description: >
+    Warme, persoonlijke verloskundige zorg in Den Haag, van kinderwens tot
+    kraamtijd.
+  services:
+    - "Zwangerschapscontroles"
+    - "Echo's"
+    - "Kraamzorg"
+  contact:
+    phone: "+31 70 000 0000"
+    email: "info@example.nl"
+    address: null
+    booking_url: "https://example.com/inschrijven"
+  brand:
+    voice: "warm, professioneel, toegankelijk"
+    colors: null
+    typography_preference: null
+  compliance:
+    regulated_industry: true
+    medical_or_legal_claims_allowed: false
+
+seo:
+  primary_keyword: "verloskundige Den Haag"
+  secondary_keywords:
+    - "echo Den Haag"
+    - "kraamzorg Den Haag"
+  target_locations:
+    - "Den Haag"
+
+integrations:
+  analytics: "plausible"
+  forms: "formspree"
+  cms: "local-mdx"

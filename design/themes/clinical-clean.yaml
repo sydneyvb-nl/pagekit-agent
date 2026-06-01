@@ -1,0 +1,18 @@
+name: clinical-clean
+use_cases:
+  - physiotherapy
+  - dental
+  - medical clinics
+colors:
+  background: "#ffffff"
+  surface: "#eef3f8"
+  text: "#0f2330"
+  muted: "#5a6b78"
+  accent: "#1f6fb2"
+  accent_contrast: "#ffffff"
+typography:
+  heading: system
+  body: system
+spacing_scale: standard
+radius_scale: sm
+motion: subtle

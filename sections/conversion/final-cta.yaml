@@ -1,0 +1,15 @@
+id: final-cta
+purpose: "Close the page with a single, unambiguous next step."
+required_props:
+  heading: string
+  body: string
+  primary_cta_label: string
+  primary_cta_href: string
+accessibility:
+  heading_level: h2
+  image_alt_required: false
+seo_notes:
+  - "Reinforce the primary action; do not introduce new competing CTAs."
+agent_rules:
+  - "Exactly one primary action. The href must resolve to a real contact route."
+  - "No vague labels ('Learn more'); use action verbs ('Plan een afspraak')."

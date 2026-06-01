@@ -1,0 +1,20 @@
+id: hero.local-service
+purpose: "Introduce the business and drive the primary action."
+required_props:
+  eyebrow: string
+  heading: string
+  subheading: string
+  primary_cta_label: string
+  primary_cta_href: string
+  secondary_cta_label: string | null
+  secondary_cta_href: string | null
+accessibility:
+  heading_level: h1
+  image_alt_required: true
+seo_notes:
+  - "Include the primary location once in the heading or subheading."
+  - "The H1 should read naturally; do not keyword-stuff."
+agent_rules:
+  - "Do not claim 24/7 availability unless explicitly present in the brief."
+  - "Do not use vague CTA text like 'Learn more' for the primary CTA."
+  - "Primary CTA href must come from the brief (booking_url, tel:, or contact)."

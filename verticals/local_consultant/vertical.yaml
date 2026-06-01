@@ -1,0 +1,17 @@
+id: local_consultant
+label: Local Consultant
+regulated: false
+recommended_theme: premium-consulting
+schema_default: ProfessionalService
+primary_goal_options:
+  - contact_requests
+  - phone_calls
+required_pages:
+  - home
+  - services
+  - service
+  - about
+  - contact
+  - faq
+content_cautions:
+  - "Do not invent client names, results or testimonials."

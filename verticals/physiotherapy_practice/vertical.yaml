@@ -1,0 +1,22 @@
+id: physiotherapy_practice
+label: Physiotherapy Practice
+regulated: true
+recommended_theme: clinical-clean
+schema_default: MedicalBusiness
+primary_goal_options:
+  - bookings
+  - contact_requests
+  - phone_calls
+required_pages:
+  - home
+  - services
+  - service
+  - about
+  - team
+  - location
+  - contact
+  - faq
+content_cautions:
+  - "Do not promise recovery times or treatment outcomes."
+  - "Do not replace professional medical advice."
+  - "Only use MedicalBusiness schema."

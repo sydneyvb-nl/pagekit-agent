@@ -1,0 +1,16 @@
+id: services-grid
+purpose: "Show all services as scannable cards linking to detail pages."
+required_props:
+  heading: string
+  items: # one per service in the brief
+    - label: string
+      summary: string
+      href: string
+accessibility:
+  heading_level: h2
+  image_alt_required: false
+seo_notes:
+  - "Each card links to its service detail page (internal link)."
+agent_rules:
+  - "List only services present in the brief; do not invent services."
+  - "Card summary must be specific to the service, not generic filler."

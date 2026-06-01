@@ -1,0 +1,29 @@
+{
+  "name": "pagekit-agent",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Agent-ready open-source website build system for local service businesses.",
+  "license": "Apache-2.0",
+  "type": "module",
+  "engines": {
+    "node": ">=20",
+    "pnpm": ">=9"
+  },
+  "packageManager": "pnpm@9.12.0",
+  "scripts": {
+    "build": "pnpm -r build",
+    "lint": "pnpm -r lint",
+    "test": "pnpm -r test",
+    "validate:brief": "pnpm --filter @pagekit/generator exec tsx src/cli.ts validate",
+    "plan": "pnpm --filter @pagekit/generator exec tsx src/cli.ts plan",
+    "inspect:vertical": "pnpm --filter @pagekit/generator exec tsx src/cli.ts inspect-vertical"
+  },
+  "keywords": [
+    "agent",
+    "website-generator",
+    "local-business",
+    "seo",
+    "astro",
+    "webstudio"
+  ]
+}

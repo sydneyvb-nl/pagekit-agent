@@ -1,0 +1,21 @@
+id: dental_clinic
+label: Dental Clinic
+regulated: true
+recommended_theme: clinical-clean
+schema_default: Dentist
+primary_goal_options:
+  - registrations
+  - bookings
+  - contact_requests
+required_pages:
+  - home
+  - services
+  - service
+  - about
+  - team
+  - location
+  - contact
+  - faq
+content_cautions:
+  - "Do not make treatment-outcome guarantees."
+  - "Do not state prices unless explicitly provided."

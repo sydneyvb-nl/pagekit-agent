@@ -1,0 +1,25 @@
+# Dependencies
+node_modules/
+.pnpm-store/
+
+# Build output
+dist/
+*.tsbuildinfo
+
+# Generated artifacts (regenerated from briefs; do not commit ad-hoc runs)
+/generated/
+!examples/**/generated/
+
+# Env & secrets
+.env
+.env.local
+*.local
+
+# OS / editor
+.DS_Store
+.idea/
+.vscode/
+*.log
+
+# Test coverage
+coverage/

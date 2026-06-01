@@ -1,0 +1,18 @@
+name: premium-consulting
+use_cases:
+  - legal / administrative consultant
+  - local consultant
+  - professional services
+colors:
+  background: "#ffffff"
+  surface: "#f3f1ee"
+  text: "#1a1a1a"
+  muted: "#6b6457"
+  accent: "#7a5c2e"
+  accent_contrast: "#ffffff"
+typography:
+  heading: serif
+  body: system
+spacing_scale: standard
+radius_scale: sm
+motion: subtle

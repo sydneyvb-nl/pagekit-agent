@@ -1,0 +1,27 @@
+{
+  "name": "@pagekit/generator",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Deterministic site planning and validation generator for pagekit-agent.",
+  "license": "Apache-2.0",
+  "bin": {
+    "pagekit": "./dist/cli.js"
+  },
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "cli": "tsx src/cli.ts",
+    "lint": "tsc -p tsconfig.json --noEmit",
+    "test": "vitest run"
+  },
+  "dependencies": {
+    "yaml": "^2.5.1",
+    "zod": "^3.23.8"
+  },
+  "devDependencies": {
+    "@types/node": "^20.14.0",
+    "tsx": "^4.19.1",
+    "typescript": "^5.6.2",
+    "vitest": "^2.1.1"
+  }
+}

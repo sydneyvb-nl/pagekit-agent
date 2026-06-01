@@ -1,0 +1,14 @@
+pagekit-agent
+Copyright 2026 The pagekit-agent contributors
+
+This product is licensed under the Apache License, Version 2.0 (the "License").
+You may obtain a copy of the License in the LICENSE file or at:
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+---
+
+pagekit-agent is an independent generator and mapping layer. It does not bundle
+or modify Webstudio source code. Webstudio itself is licensed under
+AGPL-3.0-or-later. If you choose to integrate or self-host Webstudio, you must
+comply with its license separately.

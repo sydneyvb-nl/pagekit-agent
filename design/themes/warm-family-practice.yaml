@@ -1,0 +1,18 @@
+name: warm-family-practice
+use_cases:
+  - midwifery
+  - family practice
+  - pediatric / wellness
+colors:
+  background: "#fffaf6"
+  surface: "#fdeee4"
+  text: "#3a2c25"
+  muted: "#8a766b"
+  accent: "#c4694a"
+  accent_contrast: "#ffffff"
+typography:
+  heading: serif
+  body: system
+spacing_scale: standard
+radius_scale: card
+motion: subtle

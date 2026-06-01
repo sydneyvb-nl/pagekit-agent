@@ -1,0 +1,117 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://github.com/sydneyvb-nl/pagekit-agent/input/business-brief.schema.json",
+  "title": "pagekit-agent business brief",
+  "description": "Mirror of the Zod schema in packages/generator/src/brief/schema.ts. Keep both in sync.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["business"],
+  "properties": {
+    "business": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "name",
+        "type",
+        "country",
+        "city",
+        "language",
+        "primary_goal",
+        "short_description",
+        "services",
+        "contact",
+        "brand",
+        "compliance"
+      ],
+      "properties": {
+        "name": { "type": "string", "minLength": 1 },
+        "type": {
+          "type": "string",
+          "enum": [
+            "midwifery_practice",
+            "physiotherapy_practice",
+            "dental_clinic",
+            "restaurant",
+            "legal_consultant",
+            "local_consultant",
+            "local_service"
+          ]
+        },
+        "country": { "type": "string", "minLength": 1 },
+        "city": { "type": "string", "minLength": 1 },
+        "language": { "type": "string", "minLength": 1 },
+        "primary_goal": {
+          "type": "string",
+          "enum": ["registrations", "contact_requests", "phone_calls", "bookings", "visits"]
+        },
+        "short_description": { "type": "string", "minLength": 1 },
+        "services": {
+          "type": "array",
+          "minItems": 1,
+          "items": { "type": "string", "minLength": 1 }
+        },
+        "contact": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "phone": { "type": ["string", "null"] },
+            "email": { "type": ["string", "null"], "format": "email" },
+            "address": { "type": ["string", "null"] },
+            "booking_url": { "type": ["string", "null"], "format": "uri" }
+          }
+        },
+        "brand": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["voice"],
+          "properties": {
+            "voice": { "type": "string", "minLength": 1 },
+            "colors": { "type": ["array", "null"], "items": { "type": "string" } },
+            "typography_preference": { "type": ["string", "null"] }
+          }
+        },
+        "compliance": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["regulated_industry", "medical_or_legal_claims_allowed"],
+          "properties": {
+            "regulated_industry": { "type": "boolean" },
+            "medical_or_legal_claims_allowed": { "type": "boolean" }
+          }
+        }
+      }
+    },
+    "seo": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "primary_keyword": { "type": "string" },
+        "secondary_keywords": { "type": "array", "items": { "type": "string" } },
+        "target_locations": { "type": "array", "items": { "type": "string" } }
+      }
+    },
+    "integrations": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "analytics": { "type": "string", "enum": ["plausible", "ga4", "none"] },
+        "forms": {
+          "type": "string",
+          "enum": ["formspree", "netlify", "custom", "mailto", "none"]
+        },
+        "cms": {
+          "type": "string",
+          "enum": ["local-mdx", "local-json", "airtable", "notion", "hygraph", "none"]
+        }
+      }
+    },
+    "media": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "logo_path": { "type": ["string", "null"] },
+        "image_folder": { "type": ["string", "null"] }
+      }
+    }
+  }
+}

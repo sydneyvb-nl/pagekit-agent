@@ -1,0 +1,18 @@
+name: modern-restaurant
+use_cases:
+  - restaurant
+  - lunchroom / cafe
+  - hospitality
+colors:
+  background: "#14110f"
+  surface: "#221d19"
+  text: "#f7f1ea"
+  muted: "#b8a999"
+  accent: "#d98c34"
+  accent_contrast: "#14110f"
+typography:
+  heading: serif
+  body: system
+spacing_scale: standard
+radius_scale: card
+motion: subtle

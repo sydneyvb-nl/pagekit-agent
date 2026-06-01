@@ -1,0 +1,6 @@
+# Border-radius tokens (rem).
+scale:
+  none: 0
+  sm: 0.25
+  card: 0.75
+  pill: 999
