@@ -35,12 +35,20 @@ works end to end and is covered by tests + CI.
   theme preset + design tokens into a flat set of CSS custom properties, emitted
   as `generated/theme.json`. Explicit brand colors from the brief override the
   accent; nothing is invented.
+- **SEO + structured data.** Per-page metadata (canonical, robots, OpenGraph)
+  and safe-by-default schema.org JSON-LD (`buildSeo`/`buildJsonLd` in the
+  generator): a conservative LocalBusiness-family node, `WebSite`,
+  `Organization`, `Service`, `BreadcrumbList`, and a `FAQPage` built only from
+  *answered* questions — never reviews, ratings, or hours. Absolute URLs appear
+  only when the brief sets `seo.site_url`. A `validateSeo` gate plus
+  `sitemap.xml` + `robots.txt` from the renderer.
 - **Astro renderer.** `apps/web` (Astro 5, static output) renders
   `content.json` + `theme.json` into a deployable HTML/CSS site: a section-id →
-  component registry, per-page `<title>`/meta, theme CSS variables injected at
-  `:root`, accessible nav/skip-link, and **honest draft styling** (placeholder
-  copy is visibly flagged, never passed off as finished). `pnpm build:site`
-  builds it; the example brief builds in CI.
+  component registry, per-page `<title>`/meta/canonical/OG + JSON-LD in
+  `<head>`, theme CSS variables injected at `:root`, accessible nav/skip-link,
+  and **honest draft styling** (placeholder copy is visibly flagged, never
+  passed off as finished). `pnpm build:site` builds it; the example brief
+  builds in CI.
 - **Supporting config.** Design tokens + 6 theme presets, a representative
   section library, content-safety rules, agent skills, one committed example.
 
@@ -48,8 +56,6 @@ works end to end and is covered by tests + CI.
 
 Do not claim these work. They are scaffolded as docs/roadmap only:
 
-- SEO + schema.org JSON-LD emitters and their validators (title + meta
-  description already render; JSON-LD `<script>` does not yet)
 - Accessibility runners (Axe / Playwright)
 - Form rendering (Netlify / Formspree / webhook / mailto)
 - Webstudio target mapping and handoff
@@ -68,7 +74,7 @@ Do not claim these work. They are scaffolded as docs/roadmap only:
 
 ## Quality bar right now
 
-`pnpm -r lint` (typecheck), `pnpm test` (29 tests), `pnpm validate:brief`,
+`pnpm -r lint` (typecheck), `pnpm test` (39 tests), `pnpm validate:brief`,
 `pnpm plan --dry-run`, `pnpm content --dry-run`, and `pnpm build:site` (full
 Astro static build of the example brief) all run in CI on every push and PR.
 

@@ -96,8 +96,10 @@ the report set, a typed content interface with a deterministic
 placeholder-content mode (`pagekit content`) that emits `content.json` +
 `theme.json` plus a reviewable draft and TODO list — never inventing facts — and
 an Astro 5 static renderer (`apps/web`, `pnpm build:site`) that turns those into
-a deployable HTML/CSS site. SEO/schema JSON-LD emission, accessibility runners,
-and the Webstudio handoff are **not yet implemented** — see `docs/status.md` for
+a deployable HTML/CSS site — including per-page SEO metadata (canonical, robots,
+OpenGraph), safe-by-default schema.org JSON-LD, and sitemap.xml/robots.txt.
+Accessibility runners and the Webstudio handoff are **not yet implemented** —
+see `docs/status.md` for
 the authoritative built-vs-planned list and `docs/roadmap.md` for the phased
 plan. Do not claim a site is "built and deployed" — claim exactly what the gates
 you ran actually verified.

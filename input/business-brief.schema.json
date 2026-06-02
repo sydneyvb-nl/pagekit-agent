@@ -87,7 +87,8 @@
       "properties": {
         "primary_keyword": { "type": "string" },
         "secondary_keywords": { "type": "array", "items": { "type": "string" } },
-        "target_locations": { "type": "array", "items": { "type": "string" } }
+        "target_locations": { "type": "array", "items": { "type": "string" } },
+        "site_url": { "type": "string", "format": "uri" }
       }
     },
     "integrations": {

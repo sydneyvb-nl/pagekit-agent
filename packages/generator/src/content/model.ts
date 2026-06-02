@@ -54,12 +54,37 @@ export interface SectionContent {
   todos: string[];
 }
 
+/** Open Graph / social metadata for one page. */
+export interface OpenGraph {
+  title: string;
+  description: string;
+  type: string;
+  url: string | null;
+  siteName: string;
+  locale: string;
+}
+
+/** Per-page SEO metadata, ready for the renderer's `<head>`. */
+export interface PageSeo {
+  /** Absolute when `seo.site_url` is known, else the page route (relative). */
+  canonical: string;
+  /** Whether the canonical is absolute (drives OG/sitemap inclusion). */
+  canonicalAbsolute: boolean;
+  robots: string;
+  openGraph: OpenGraph;
+}
+
+/** A schema.org node, emitted verbatim as a JSON-LD `<script>`. */
+export type JsonLdNode = Record<string, unknown>;
+
 /** Resolved content for one page. */
 export interface PageContent {
   route: string;
   pageType: string;
   title: string;
   metaDescription: ContentField;
+  seo: PageSeo;
+  jsonLd: JsonLdNode[];
   sections: SectionContent[];
   /** Approximate word count across all resolved copy on the page. */
   wordCount: number;
@@ -76,6 +101,8 @@ export interface SiteContent {
   business: string;
   language: string;
   mode: ContentMode;
+  /** Canonical site origin from `seo.site_url`, or null when not provided. */
+  siteUrl: string | null;
   pages: PageContent[];
   /** Every TODO across the site, de-duplicated, for `missing-inputs` rollup. */
   todos: string[];

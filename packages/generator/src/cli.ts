@@ -7,6 +7,7 @@ import { validatePlan, type PlanFinding } from "./plan/validatePlan.js";
 import { writeReports } from "./report/writeReports.js";
 import { generateContent } from "./content/generateContent.js";
 import { validateContent, type ContentFinding } from "./content/validateContent.js";
+import { validateSeo } from "./seo/validateSeo.js";
 import { writeContent } from "./content/writeContent.js";
 import { resolveTheme } from "./theme/resolveTheme.js";
 import { findRepoRoot, generatedDir, verticalsDir } from "./paths.js";
@@ -113,7 +114,7 @@ function cmdContent(briefPath: string | undefined, dryRun: boolean): number {
   }
 
   const content = generateContent(plan, loaded.brief, { mode: "placeholder" });
-  const findings = validateContent(content, plan);
+  const findings = [...validateContent(content, plan), ...validateSeo(content)];
   printContentFindings(findings);
 
   const errors = findings.filter((f) => f.level === "error");

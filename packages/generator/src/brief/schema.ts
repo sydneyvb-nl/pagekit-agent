@@ -70,6 +70,9 @@ export const SeoSchema = z
     primary_keyword: nonEmpty.optional(),
     secondary_keywords: z.array(nonEmpty).optional(),
     target_locations: z.array(nonEmpty).optional(),
+    /** Canonical site origin, e.g. "https://praktijk.nl". Enables absolute
+     * canonical/OpenGraph URLs, JSON-LD `url`, and a sitemap. */
+    site_url: z.url().optional(),
   })
   .optional();
 

@@ -31,11 +31,28 @@ export interface SectionContent {
   cta: { label: string; href: string } | null;
   todos: string[];
 }
+export interface OpenGraph {
+  title: string;
+  description: string;
+  type: string;
+  url: string | null;
+  siteName: string;
+  locale: string;
+}
+export interface PageSeo {
+  canonical: string;
+  canonicalAbsolute: boolean;
+  robots: string;
+  openGraph: OpenGraph;
+}
+export type JsonLdNode = Record<string, unknown>;
 export interface PageContent {
   route: string;
   pageType: string;
   title: string;
   metaDescription: ContentField;
+  seo: PageSeo;
+  jsonLd: JsonLdNode[];
   sections: SectionContent[];
   wordCount: number;
   minWords: number;
@@ -45,6 +62,7 @@ export interface SiteContent {
   business: string;
   language: string;
   mode: string;
+  siteUrl: string | null;
   pages: PageContent[];
   todos: string[];
 }

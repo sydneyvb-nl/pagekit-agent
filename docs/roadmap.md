@@ -20,8 +20,8 @@ Legend: ✅ done · 🟡 partial · ⏳ planned
 | 7     | Site plan generator           | ✅     | routes, intents, services, legal pages, link graph, reports  |
 | 8     | Content generation contracts  | ✅     | typed `PageContent` model + placeholder mode + gates + CLI  |
 | 9     | Astro site generator          | ✅     | `apps/web` (Astro 5) renders content.json+theme.json → static |
-| 10    | SEO system                    | 🟡     | title/route rules in plan + gates; emitter/validator ⏳     |
-| 11    | Schema.org system             | 🟡     | conservative type resolution in plan; JSON-LD emitter ⏳    |
+| 10    | SEO system                    | ✅     | canonical/robots/OG emitter + validator + sitemap/robots.txt |
+| 11    | Schema.org system             | ✅     | safe-by-default JSON-LD emitter (business/Service/FAQ/crumbs) |
 | 12    | Accessibility validation      | ⏳     | rules documented; Axe/Playwright runners ⏳                 |
 | 13    | Forms & integrations          | 🟡     | brief config + EU consent gate; renderers ⏳               |
 | 14    | Webstudio target mapping      | ⏳     | not started                                                  |
@@ -38,9 +38,9 @@ Legend: ✅ done · 🟡 partial · ⏳ planned
    model, deterministic placeholder mode, content gates, `pagekit content` CLI.
 2. ~~**Astro generator** (Phase 9)~~ — ✅ done: `apps/web` (Astro 5) renders
    `content.json` + `theme.json` to a static site; `pnpm build:site`; in CI.
-3. **SEO + schema emitters** (Phases 10–11) — JSON-LD per page + a validator in
-   the gates. Title + meta description already render into each page `<head>`;
-   schema types travel in the plan but are not yet emitted as `<script>` LD.
+3. ~~**SEO + schema emitters** (Phases 10–11)~~ — ✅ done: per-page
+   canonical/robots/OpenGraph + safe JSON-LD (business/Service/FAQ/breadcrumbs),
+   `validateSeo` gate, and sitemap.xml/robots.txt from the renderer.
 4. **First full example site** (Phase 15) — generate + commit the midwifery
    brief's `content.json`/`theme.json` and built output under `examples/`.
 5. **Accessibility runners** (Phase 12) — Axe/Playwright against the built site.

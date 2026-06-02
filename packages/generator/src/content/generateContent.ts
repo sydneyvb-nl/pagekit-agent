@@ -1,6 +1,8 @@
 import type { Brief } from "../brief/schema.js";
 import type { PlannedPage, SitePlan } from "../plan/planSite.js";
 import { slugify } from "../util/slugify.js";
+import { buildPageSeo } from "../seo/buildSeo.js";
+import { buildPageJsonLd } from "../schema/buildJsonLd.js";
 import {
   brief as briefField,
   countWords,
@@ -36,7 +38,8 @@ export function generateContent(
   options: GenerateContentOptions = {},
 ): SiteContent {
   const mode: ContentMode = options.mode ?? "placeholder";
-  const pages = plan.pages.map((page) => buildPage(page, plan, brief));
+  const siteUrl = brief.seo?.site_url ?? null;
+  const pages = plan.pages.map((page) => buildPage(page, plan, brief, siteUrl));
 
   const todos = dedupe(pages.flatMap((p) => p.todos));
 
@@ -44,12 +47,18 @@ export function generateContent(
     business: plan.business,
     language: plan.language,
     mode,
+    siteUrl,
     pages,
     todos,
   };
 }
 
-function buildPage(page: PlannedPage, plan: SitePlan, brief: Brief): PageContent {
+function buildPage(
+  page: PlannedPage,
+  plan: SitePlan,
+  brief: Brief,
+  siteUrl: string | null,
+): PageContent {
   const ctx: PageCtx = {
     plan,
     brief,
@@ -69,11 +78,17 @@ function buildPage(page: PlannedPage, plan: SitePlan, brief: Brief): PageContent
     );
   }
 
+  const metaDescription = buildMetaDescription(page, ctx);
+  const seo = buildPageSeo(page, metaDescription.value, brief, siteUrl);
+  const jsonLd = buildPageJsonLd({ page, sections, brief, siteUrl, serviceName: ctx.serviceName });
+
   return {
     route: page.route,
     pageType: page.pageType,
     title: page.title,
-    metaDescription: buildMetaDescription(page, ctx),
+    metaDescription,
+    seo,
+    jsonLd,
     sections,
     wordCount,
     minWords: page.minWords,

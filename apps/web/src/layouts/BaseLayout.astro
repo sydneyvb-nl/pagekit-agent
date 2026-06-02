@@ -45,7 +45,23 @@ const year = new Date().getFullYear();
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>{page.title}</title>
     <meta name="description" content={page.metaDescription.value} />
-    {page.pageType === "404" && <meta name="robots" content="noindex" />}
+    <meta name="robots" content={page.seo.robots} />
+    <link rel="canonical" href={page.seo.canonical} />
+
+    <meta property="og:title" content={page.seo.openGraph.title} />
+    <meta property="og:description" content={page.seo.openGraph.description} />
+    <meta property="og:type" content={page.seo.openGraph.type} />
+    <meta property="og:site_name" content={page.seo.openGraph.siteName} />
+    <meta property="og:locale" content={page.seo.openGraph.locale} />
+    {page.seo.openGraph.url && <meta property="og:url" content={page.seo.openGraph.url} />}
+    <meta name="twitter:card" content="summary" />
+
+    {
+      page.jsonLd.map((node) => (
+        <script type="application/ld+json" set:html={JSON.stringify(node)} />
+      ))
+    }
+
     <style set:html={themeRootCss(theme)}></style>
   </head>
   <body>

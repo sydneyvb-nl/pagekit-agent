@@ -30,6 +30,7 @@ business:
     medical_or_legal_claims_allowed: false
 
 seo:
+  site_url: "https://verloskundigenpraktijk-example.nl"
   primary_keyword: "verloskundige Den Haag"
   secondary_keywords:
     - "echo Den Haag"
