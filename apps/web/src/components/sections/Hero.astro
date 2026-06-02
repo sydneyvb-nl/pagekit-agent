@@ -1,0 +1,25 @@
+---
+import type { SectionContent } from "../../lib/site";
+import Field from "../Field.astro";
+
+interface Props {
+  section: SectionContent;
+}
+const { section } = Astro.props;
+---
+
+<section class="hero">
+  <div class="container">
+    {section.heading && <h1><Field field={section.heading} /></h1>}
+    {section.body.map((b) => <Field field={b} as="p" />)}
+    {
+      section.cta && (
+        <p>
+          <a class="button" href={section.cta.href}>
+            {section.cta.label}
+          </a>
+        </p>
+      )
+    }
+  </div>
+</section>

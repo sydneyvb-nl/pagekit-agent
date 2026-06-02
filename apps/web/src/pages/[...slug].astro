@@ -1,0 +1,20 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Section from "../components/Section.astro";
+import { loadSite, loadTheme, routeToSlug, type PageContent } from "../lib/site";
+
+export async function getStaticPaths() {
+  const site = loadSite();
+  const theme = loadTheme();
+  return site.pages.map((page: PageContent) => ({
+    params: { slug: routeToSlug(page.route) },
+    props: { page, site, theme },
+  }));
+}
+
+const { page, site, theme } = Astro.props;
+---
+
+<BaseLayout page={page} site={site} theme={theme}>
+  {page.sections.map((section) => <Section section={section} />)}
+</BaseLayout>

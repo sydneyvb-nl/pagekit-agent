@@ -1,0 +1,44 @@
+---
+import type { SectionContent } from "../lib/site";
+import Hero from "./sections/Hero.astro";
+import Prose from "./sections/Prose.astro";
+import CardGrid from "./sections/CardGrid.astro";
+import Steps from "./sections/Steps.astro";
+import Faq from "./sections/Faq.astro";
+import Testimonials from "./sections/Testimonials.astro";
+import Cta from "./sections/Cta.astro";
+import ContactCard from "./sections/ContactCard.astro";
+
+interface Props {
+  section: SectionContent;
+}
+
+const { section } = Astro.props;
+const base = section.section.split(".")[0];
+
+// Map each section id to a presentational component. Unknown ids fall back to
+// Prose so a new blueprint section still renders rather than disappearing.
+const COMPONENT: Record<string, typeof Prose> = {
+  hero: Hero,
+  "trust-bar": Prose,
+  "services-grid": CardGrid,
+  "service-grid": CardGrid,
+  "service-summary": Prose,
+  benefits: CardGrid,
+  "process-steps": Steps,
+  testimonials: Testimonials,
+  faq: Faq,
+  "faq-preview": Faq,
+  "related-services": CardGrid,
+  "final-cta": Cta,
+  "appointment-cta": Cta,
+  "contact-card": ContactCard,
+  "location-map": Prose,
+  "service-area": Prose,
+  "rich-text": Prose,
+};
+
+const Component = COMPONENT[base ?? ""] ?? Prose;
+---
+
+<Component section={section} />

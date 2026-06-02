@@ -8,8 +8,9 @@ import { writeReports } from "./report/writeReports.js";
 import { generateContent } from "./content/generateContent.js";
 import { validateContent, type ContentFinding } from "./content/validateContent.js";
 import { writeContent } from "./content/writeContent.js";
+import { resolveTheme } from "./theme/resolveTheme.js";
 import { findRepoRoot, generatedDir, verticalsDir } from "./paths.js";
-import { existsSync, readFileSync } from "node:fs";
+import { existsSync, readFileSync, writeFileSync } from "node:fs";
 import { parse as parseYaml } from "yaml";
 
 const DEFAULT_BRIEF = "input/business-brief.example.yaml";
@@ -117,14 +118,21 @@ function cmdContent(briefPath: string | undefined, dryRun: boolean): number {
 
   const errors = findings.filter((f) => f.level === "error");
 
+  const theme = resolveTheme(plan.theme, {
+    root,
+    brandColors: loaded.brief.business.brand.colors ?? null,
+  });
+
   if (!dryRun) {
     const outDir = generatedDir(root);
     const written = writeContent(content, outDir);
-    console.log(`\n✓ Wrote ${written.length} content file(s) to ${rel(root, outDir)}/`);
+    writeFileSync(join(outDir, "theme.json"), JSON.stringify(theme, null, 2) + "\n");
+    console.log(`\n✓ Wrote ${written.length + 1} content file(s) to ${rel(root, outDir)}/`);
     for (const w of written) console.log(`  - ${w.file}`);
+    console.log(`  - theme.json (${theme.name})`);
   } else {
     console.log(
-      `\n(dry run: ${content.pages.length} pages, ${content.todos.length} TODOs, no files written)`,
+      `\n(dry run: ${content.pages.length} pages, ${content.todos.length} TODOs, theme '${theme.name}', no files written)`,
     );
   }
 

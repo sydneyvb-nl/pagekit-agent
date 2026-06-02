@@ -1,0 +1,225 @@
+/*
+ * Base stylesheet. Every color, size and font here resolves to a CSS custom
+ * property emitted by the generator's theme resolver (see generated/theme.json),
+ * so restyling is a matter of swapping the theme preset — never editing this
+ * file. Values below are only structural defaults.
+ */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  font-family: var(--font-body, system-ui, sans-serif);
+  line-height: var(--leading-normal, 1.6);
+  color: var(--color-text, #1a1a1a);
+  background: var(--color-bg, #ffffff);
+  scroll-behavior: smooth;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+}
+
+body {
+  margin: 0;
+  font-size: var(--text-body, 1rem);
+}
+
+h1,
+h2,
+h3 {
+  font-family: var(--font-heading, inherit);
+  font-weight: var(--weight-bold, 700);
+  line-height: var(--leading-tight, 1.2);
+  margin: 0 0 var(--space-md, 1rem);
+}
+
+h1 {
+  font-size: var(--text-h1, 2.75rem);
+}
+h2 {
+  font-size: var(--text-h2, 2rem);
+}
+h3 {
+  font-size: var(--text-h3, 1.5rem);
+}
+
+p {
+  margin: 0 0 var(--space-md, 1rem);
+}
+
+a {
+  color: var(--color-accent, #0a5);
+  text-decoration-thickness: 1px;
+  text-underline-offset: 2px;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+.skip-link {
+  position: absolute;
+  left: -9999px;
+  top: 0;
+  background: var(--color-accent);
+  color: var(--color-accent-contrast);
+  padding: var(--space-sm) var(--space-md);
+  z-index: 10;
+}
+.skip-link:focus {
+  left: var(--space-sm);
+  top: var(--space-sm);
+}
+
+.container {
+  width: min(72rem, 100% - 2 * var(--space-lg, 1.5rem));
+  margin-inline: auto;
+}
+
+.site-header {
+  border-bottom: 1px solid var(--color-surface);
+  padding-block: var(--space-md);
+}
+.site-header .container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-md);
+  align-items: center;
+  justify-content: space-between;
+}
+.wordmark {
+  font-family: var(--font-heading);
+  font-weight: var(--weight-bold);
+  font-size: var(--text-lead);
+  color: var(--color-text);
+  text-decoration: none;
+}
+.site-nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-md);
+}
+.site-nav a {
+  color: var(--color-text);
+  text-decoration: none;
+}
+.site-nav a[aria-current="page"] {
+  color: var(--color-accent);
+  font-weight: var(--weight-medium);
+}
+
+main section {
+  padding-block: var(--section-y, 2.5rem);
+}
+main section:nth-of-type(even) {
+  background: var(--color-surface);
+}
+
+.eyebrow {
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  font-size: 0.8rem;
+  color: var(--color-muted);
+  margin-bottom: var(--space-sm);
+}
+.lead {
+  font-size: var(--text-lead, 1.125rem);
+  color: var(--color-muted);
+  max-width: 60ch;
+}
+
+.button {
+  display: inline-block;
+  background: var(--color-accent);
+  color: var(--color-accent-contrast);
+  padding: var(--space-sm) var(--space-lg);
+  border-radius: var(--radius, 0.5rem);
+  text-decoration: none;
+  font-weight: var(--weight-medium);
+  transition: filter var(--motion-duration, 160ms) ease;
+}
+.button:hover {
+  filter: brightness(0.94);
+}
+
+.grid {
+  display: grid;
+  gap: var(--space-lg);
+  grid-template-columns: repeat(auto-fit, minmax(min(16rem, 100%), 1fr));
+  list-style: none;
+  padding: 0;
+  margin: var(--space-lg) 0 0;
+}
+.card {
+  background: var(--color-bg);
+  border: 1px solid var(--color-surface);
+  border-radius: var(--radius, 0.5rem);
+  padding: var(--space-lg);
+}
+.card h3 {
+  margin-top: 0;
+}
+.card a {
+  font-weight: var(--weight-medium);
+}
+
+.steps {
+  display: grid;
+  gap: var(--space-lg);
+  counter-reset: step;
+  padding: 0;
+  margin: var(--space-lg) 0 0;
+  list-style: none;
+}
+
+.faq details {
+  border-bottom: 1px solid var(--color-surface);
+  padding: var(--space-md) 0;
+}
+.faq summary {
+  cursor: pointer;
+  font-weight: var(--weight-medium);
+}
+
+.cta-band {
+  text-align: center;
+}
+
+/* Honest draft styling: placeholder copy that still needs a human is visibly
+   flagged rather than silently passed off as finished content. */
+[data-placeholder] {
+  display: inline-block;
+  border: 1px dashed var(--color-muted);
+  border-radius: var(--radius-sm, 0.25rem);
+  padding: 0.1em 0.4em;
+  color: var(--color-muted);
+  font-style: italic;
+}
+
+.site-footer {
+  border-top: 1px solid var(--color-surface);
+  padding-block: var(--space-xl);
+  color: var(--color-muted);
+  font-size: 0.9rem;
+}
+.site-footer .container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-md);
+  justify-content: space-between;
+}
+.site-footer nav {
+  display: flex;
+  gap: var(--space-md);
+  flex-wrap: wrap;
+}
+.site-footer a {
+  color: var(--color-muted);
+}

@@ -1,0 +1,16 @@
+{
+  "name": "@pagekit/web",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Astro static renderer for pagekit-agent generated sites.",
+  "license": "Apache-2.0",
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview"
+  },
+  "dependencies": {
+    "astro": "5.18.1"
+  }
+}

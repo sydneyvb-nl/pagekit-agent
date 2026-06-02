@@ -31,6 +31,16 @@ works end to end and is covered by tests + CI.
   `content-draft.md` / `content-todos.md` output set.
 - **CLI.** `validate`, `plan` (+`--dry-run`), `content` (+`--dry-run`),
   `inspect-vertical`.
+- **Theme resolver.** `resolveTheme` (`packages/generator/src/theme/`) turns a
+  theme preset + design tokens into a flat set of CSS custom properties, emitted
+  as `generated/theme.json`. Explicit brand colors from the brief override the
+  accent; nothing is invented.
+- **Astro renderer.** `apps/web` (Astro 5, static output) renders
+  `content.json` + `theme.json` into a deployable HTML/CSS site: a section-id →
+  component registry, per-page `<title>`/meta, theme CSS variables injected at
+  `:root`, accessible nav/skip-link, and **honest draft styling** (placeholder
+  copy is visibly flagged, never passed off as finished). `pnpm build:site`
+  builds it; the example brief builds in CI.
 - **Supporting config.** Design tokens + 6 theme presets, a representative
   section library, content-safety rules, agent skills, one committed example.
 
@@ -38,8 +48,8 @@ works end to end and is covered by tests + CI.
 
 Do not claim these work. They are scaffolded as docs/roadmap only:
 
-- Astro site rendering and `pnpm build` (consumes `content.json`)
-- SEO + schema.org JSON-LD emitters and their validators
+- SEO + schema.org JSON-LD emitters and their validators (title + meta
+  description already render; JSON-LD `<script>` does not yet)
 - Accessibility runners (Axe / Playwright)
 - Form rendering (Netlify / Formspree / webhook / mailto)
 - Webstudio target mapping and handoff
@@ -58,6 +68,10 @@ Do not claim these work. They are scaffolded as docs/roadmap only:
 
 ## Quality bar right now
 
-`pnpm -r lint` (typecheck), `pnpm test` (24 tests), `pnpm validate:brief`,
-`pnpm plan --dry-run`, and `pnpm content --dry-run` all run in CI on every push
-and PR.
+`pnpm -r lint` (typecheck), `pnpm test` (29 tests), `pnpm validate:brief`,
+`pnpm plan --dry-run`, `pnpm content --dry-run`, and `pnpm build:site` (full
+Astro static build of the example brief) all run in CI on every push and PR.
+
+**Local note.** Astro 6/7 require Node ≥ 22.12; the renderer is pinned to
+**Astro 5.18.1** so it also builds on the Node 20 dev machine (`^20.3.0`). The
+version clears the 14-day supply-chain cooldown.

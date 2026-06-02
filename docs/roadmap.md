@@ -14,12 +14,12 @@ Legend: ✅ done · 🟡 partial · ⏳ planned
 | 1     | Repository foundation         | ✅     | workspace, license, generator skeleton, CI                   |
 | 2     | Business-brief schema         | ✅     | Zod + JSON Schema, loader, validator, tests                  |
 | 3     | Vertical system               | ✅     | 6 verticals + `local-service` fallback, resolver             |
-| 4     | Design tokens & themes        | 🟡     | token + theme files present; CSS/Webstudio export ⏳        |
+| 4     | Design tokens & themes        | 🟡     | tokens+themes → CSS vars via `resolveTheme`; Webstudio export ⏳ |
 | 5     | Section library               | 🟡     | section schema + representative sections; full set ⏳       |
 | 6     | Page blueprint system         | 🟡     | blueprints implemented in code; external YAML authoring ⏳  |
 | 7     | Site plan generator           | ✅     | routes, intents, services, legal pages, link graph, reports  |
 | 8     | Content generation contracts  | ✅     | typed `PageContent` model + placeholder mode + gates + CLI  |
-| 9     | Astro site generator          | ⏳     | not started                                                  |
+| 9     | Astro site generator          | ✅     | `apps/web` (Astro 5) renders content.json+theme.json → static |
 | 10    | SEO system                    | 🟡     | title/route rules in plan + gates; emitter/validator ⏳     |
 | 11    | Schema.org system             | 🟡     | conservative type resolution in plan; JSON-LD emitter ⏳    |
 | 12    | Accessibility validation      | ⏳     | rules documented; Axe/Playwright runners ⏳                 |
@@ -36,10 +36,11 @@ Legend: ✅ done · 🟡 partial · ⏳ planned
 
 1. ~~**Content generation interface** (Phase 8)~~ — ✅ done: typed `PageContent`
    model, deterministic placeholder mode, content gates, `pagekit content` CLI.
-2. **Astro generator** (Phase 9) — render `SiteContent` (+ `SitePlan`) to a
-   buildable site. This is now unblocked: `content.json` is the render input.
-3. **SEO + schema emitters** (Phases 10–11) — per-page metadata + JSON-LD with
-   their validators wired into the gates. The `metaDescription` field already
-   travels with each page.
-4. **First full example site** (Phase 15) — the midwifery brief, generated and
-   committed under `examples/generated-sites/`.
+2. ~~**Astro generator** (Phase 9)~~ — ✅ done: `apps/web` (Astro 5) renders
+   `content.json` + `theme.json` to a static site; `pnpm build:site`; in CI.
+3. **SEO + schema emitters** (Phases 10–11) — JSON-LD per page + a validator in
+   the gates. Title + meta description already render into each page `<head>`;
+   schema types travel in the plan but are not yet emitted as `<script>` LD.
+4. **First full example site** (Phase 15) — generate + commit the midwifery
+   brief's `content.json`/`theme.json` and built output under `examples/`.
+5. **Accessibility runners** (Phase 12) — Axe/Playwright against the built site.

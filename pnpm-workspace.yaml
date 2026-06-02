@@ -1,5 +1,6 @@
 packages:
   - "packages/*"
+  - "apps/*"
 
 # Supply-chain cooldown: reject dependency versions published less than 14 days
 # ago, so a freshly-compromised release can't slip into the lockfile. Pins below

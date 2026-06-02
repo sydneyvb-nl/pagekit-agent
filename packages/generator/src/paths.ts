@@ -22,3 +22,7 @@ export function verticalsDir(root = findRepoRoot()): string {
 export function generatedDir(root = findRepoRoot()): string {
   return join(root, "generated");
 }
+
+export function designDir(root = findRepoRoot()): string {
+  return join(root, "design");
+}

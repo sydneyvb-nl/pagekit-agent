@@ -1,0 +1,28 @@
+---
+/**
+ * Render one resolved content field. Placeholder-sourced copy (still awaiting a
+ * human) is wrapped with `data-placeholder` so the draft honestly shows its
+ * gaps instead of passing TODO text off as finished content.
+ */
+import type { ContentField } from "../lib/site";
+
+interface Props {
+  field: ContentField | null | undefined;
+  as?: "span" | "p";
+}
+
+const { field, as = "span" } = Astro.props;
+const Tag = as;
+const isPlaceholder = field?.source === "placeholder";
+const text = field?.value ?? "";
+const display = isPlaceholder ? text.replace(/^TODO:\s*/i, "") : text;
+---
+
+{
+  field &&
+    (isPlaceholder ? (
+      <Tag data-placeholder="" title="Placeholder — needs real content">{display}</Tag>
+    ) : (
+      <Tag>{display}</Tag>
+    ))
+}

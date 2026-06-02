@@ -34,3 +34,6 @@ jobs:
 
       - name: Generate placeholder content (content quality gates)
         run: pnpm content --dry-run
+
+      - name: Build the example site (Astro static build)
+        run: pnpm build:site

@@ -1,0 +1,31 @@
+---
+import type { SectionContent } from "../../lib/site";
+import Field from "../Field.astro";
+
+interface Props {
+  section: SectionContent;
+}
+const { section } = Astro.props;
+// Testimonials are never invented. When the brief supplies none, the section
+// shows an honest placeholder rather than fabricated reviews.
+---
+
+<section class="testimonials">
+  <div class="container">
+    {section.heading && <h2><Field field={section.heading} /></h2>}
+    {
+      section.items.length > 0 ? (
+        <ul class="grid">
+          {section.items.map((item) => (
+            <li class="card">
+              <blockquote><Field field={item.body} /></blockquote>
+              <cite><Field field={item.title} /></cite>
+            </li>
+          ))}
+        </ul>
+      ) : (
+        <p><span data-placeholder="" title="Placeholder — needs real content">Nog geen ervaringen toegevoegd.</span></p>
+      )
+    }
+  </div>
+</section>

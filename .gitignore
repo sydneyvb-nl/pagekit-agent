@@ -5,6 +5,7 @@ node_modules/
 # Build output
 dist/
 *.tsbuildinfo
+.astro/
 
 # Generated artifacts (regenerated from briefs; do not commit ad-hoc runs)
 /generated/

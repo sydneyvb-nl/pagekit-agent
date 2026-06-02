@@ -1,0 +1,87 @@
+---
+import "../styles/global.css";
+import {
+  themeRootCss,
+  navPages,
+  footerPages,
+  type PageContent,
+  type SiteContent,
+  type ResolvedTheme,
+} from "../lib/site";
+
+interface Props {
+  page: PageContent;
+  site: SiteContent;
+  theme: ResolvedTheme;
+}
+
+const NAV_LABELS: Record<string, string> = {
+  home: "Home",
+  services: "Diensten",
+  about: "Over ons",
+  team: "Team",
+  location: "Locatie",
+  faq: "Veelgestelde vragen",
+  contact: "Contact",
+  privacy: "Privacy",
+  cookies: "Cookies",
+  terms: "Voorwaarden",
+};
+
+function navLabel(p: PageContent): string {
+  return NAV_LABELS[p.pageType] ?? p.title.split("|")[0]!.trim();
+}
+
+const { page, site, theme } = Astro.props;
+const nav = navPages(site);
+const legal = footerPages(site);
+const year = new Date().getFullYear();
+---
+
+<!doctype html>
+<html lang={site.language}>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{page.title}</title>
+    <meta name="description" content={page.metaDescription.value} />
+    {page.pageType === "404" && <meta name="robots" content="noindex" />}
+    <style set:html={themeRootCss(theme)}></style>
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Naar inhoud</a>
+    <header class="site-header">
+      <div class="container">
+        <a class="wordmark" href="/">{site.business}</a>
+        <nav class="site-nav" aria-label="Hoofdmenu">
+          {
+            nav.map((p) => (
+              <a href={p.route} aria-current={p.route === page.route ? "page" : undefined}>
+                {navLabel(p)}
+              </a>
+            ))
+          }
+        </nav>
+      </div>
+    </header>
+
+    <main id="main">
+      <slot />
+    </main>
+
+    <footer class="site-footer">
+      <div class="container">
+        <span>© {year} {site.business}</span>
+        {
+          legal.length > 0 && (
+            <nav aria-label="Juridisch">
+              {legal.map((p) => (
+                <a href={p.route}>{navLabel(p)}</a>
+              ))}
+            </nav>
+          )
+        }
+      </div>
+    </footer>
+  </body>
+</html>

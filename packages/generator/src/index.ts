@@ -6,6 +6,7 @@ export * from "./plan/blueprints.js";
 export * from "./plan/planSite.js";
 export * from "./plan/validatePlan.js";
 export * from "./report/writeReports.js";
+export * from "./theme/resolveTheme.js";
 export * from "./content/model.js";
 export * from "./content/generateContent.js";
 export * from "./content/validateContent.js";
