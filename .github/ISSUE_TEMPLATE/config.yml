@@ -1,0 +1,8 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Documentation
+    url: https://github.com/sydneyvb-nl/pagekit-agent/blob/main/docs/README.md
+    about: The documentation map — start here before opening an issue.
+  - name: Agent operating instructions
+    url: https://github.com/sydneyvb-nl/pagekit-agent/blob/main/AGENTS.md
+    about: How an LLM agent is expected to operate this repo.

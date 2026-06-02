@@ -1,0 +1,31 @@
+name: Bug report
+description: Something in the generator, schema, or a vertical behaves incorrectly.
+labels: ["bug"]
+body:
+  - type: textarea
+    id: what-happened
+    attributes:
+      label: What happened?
+      description: What did you run, and what went wrong?
+      placeholder: "`pnpm plan input/my-brief.yaml` produced a duplicate route for…"
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: What did you expect?
+    validations:
+      required: true
+  - type: textarea
+    id: repro
+    attributes:
+      label: Reproduction
+      description: Minimal brief or steps. Paste the relevant part of your business brief if possible.
+      render: yaml
+  - type: input
+    id: versions
+    attributes:
+      label: Environment
+      placeholder: "Node 24.x, pnpm 11.x, pagekit-agent commit/tag"
+    validations:
+      required: true

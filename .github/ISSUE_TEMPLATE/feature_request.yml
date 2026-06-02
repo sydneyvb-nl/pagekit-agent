@@ -1,0 +1,37 @@
+name: Feature request
+description: Propose a new vertical, section, blueprint, quality gate, or capability.
+labels: ["enhancement"]
+body:
+  - type: dropdown
+    id: area
+    attributes:
+      label: Area
+      options:
+        - New vertical (business type)
+        - New section / blueprint
+        - SEO / schema.org
+        - Accessibility
+        - Quality gate
+        - Astro / Webstudio output
+        - Docs / agent instructions
+        - Other
+    validations:
+      required: true
+  - type: textarea
+    id: problem
+    attributes:
+      label: What problem does this solve?
+    validations:
+      required: true
+  - type: textarea
+    id: proposal
+    attributes:
+      label: Proposed approach
+      description: Remember the core principle — extension should be config, not a generator rewrite.
+  - type: checkboxes
+    id: principles
+    attributes:
+      label: Fits the principles?
+      options:
+        - label: It keeps structure deterministic and copy constrained.
+        - label: It is safe by default (never invents unverifiable claims).
