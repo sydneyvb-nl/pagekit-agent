@@ -92,8 +92,11 @@ Written to `generated/`:
 
 The generator implemented today covers: brief validation, vertical resolution,
 deterministic site planning, the internal-link graph, structural quality gates,
-and the report set. Astro rendering, SEO/schema emission, accessibility runners,
-and the Webstudio handoff are **not yet implemented** — see `docs/status.md` for
+the report set, and a typed content interface with a deterministic
+placeholder-content mode (`pagekit content`) that emits `content.json` plus a
+reviewable draft and TODO list — never inventing facts. Astro rendering,
+SEO/schema emission, accessibility runners, and the Webstudio handoff are **not
+yet implemented** — see `docs/status.md` for
 the authoritative built-vs-planned list and `docs/roadmap.md` for the phased
 plan. Do not claim a site is "built and deployed" — claim exactly what the gates
 you ran actually verified.

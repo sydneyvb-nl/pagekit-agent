@@ -31,3 +31,6 @@ jobs:
 
       - name: Plan example site (structural quality gates)
         run: pnpm plan --dry-run
+
+      - name: Generate placeholder content (content quality gates)
+        run: pnpm content --dry-run

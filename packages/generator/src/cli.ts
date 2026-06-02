@@ -5,6 +5,9 @@ import { resolveVertical } from "./vertical/resolveVertical.js";
 import { planSite } from "./plan/planSite.js";
 import { validatePlan, type PlanFinding } from "./plan/validatePlan.js";
 import { writeReports } from "./report/writeReports.js";
+import { generateContent } from "./content/generateContent.js";
+import { validateContent, type ContentFinding } from "./content/validateContent.js";
+import { writeContent } from "./content/writeContent.js";
 import { findRepoRoot, generatedDir, verticalsDir } from "./paths.js";
 import { existsSync, readFileSync } from "node:fs";
 import { parse as parseYaml } from "yaml";
@@ -18,6 +21,8 @@ function main(argv: string[]): number {
       return cmdValidate(firstPositional(rest));
     case "plan":
       return cmdPlan(firstPositional(rest), rest.includes("--dry-run"));
+    case "content":
+      return cmdContent(firstPositional(rest), rest.includes("--dry-run"));
     case "inspect-vertical":
       return cmdInspectVertical(rest[0]);
     case undefined:
@@ -84,6 +89,55 @@ function cmdPlan(briefPath: string | undefined, dryRun: boolean): number {
   return 0;
 }
 
+function cmdContent(briefPath: string | undefined, dryRun: boolean): number {
+  const path = resolveBriefPath(briefPath);
+  const loaded = loadBrief(path);
+  if (!loaded.ok) {
+    console.error(`✗ Cannot generate content: brief is invalid (${path}). Run \`validate\` first.`);
+    return 1;
+  }
+
+  const root = findRepoRoot();
+  const { vertical, usedFallback, requestedId } = resolveVertical(loaded.brief.business.type, root);
+  if (usedFallback) {
+    console.log(`ℹ Vertical '${requestedId}' not found; using fallback '${vertical.id}'.`);
+  }
+
+  const plan = planSite({ brief: loaded.brief, vertical, usedFallbackVertical: usedFallback });
+  const planErrors = validatePlan(plan, loaded.brief).filter((f) => f.level === "error");
+  if (planErrors.length) {
+    console.error(`✗ Cannot generate content: plan has ${planErrors.length} blocking error(s).`);
+    for (const e of planErrors) console.error(`  - ${e.message}`);
+    return 1;
+  }
+
+  const content = generateContent(plan, loaded.brief, { mode: "placeholder" });
+  const findings = validateContent(content, plan);
+  printContentFindings(findings);
+
+  const errors = findings.filter((f) => f.level === "error");
+
+  if (!dryRun) {
+    const outDir = generatedDir(root);
+    const written = writeContent(content, outDir);
+    console.log(`\n✓ Wrote ${written.length} content file(s) to ${rel(root, outDir)}/`);
+    for (const w of written) console.log(`  - ${w.file}`);
+  } else {
+    console.log(
+      `\n(dry run: ${content.pages.length} pages, ${content.todos.length} TODOs, no files written)`,
+    );
+  }
+
+  if (errors.length) {
+    console.error(`\n✗ Content has ${errors.length} blocking error(s).`);
+    return 1;
+  }
+  console.log(
+    `\n✓ Content passes structural gates (${content.pages.length} pages, ${content.todos.length} open TODOs).`,
+  );
+  return 0;
+}
+
 function cmdInspectVertical(id?: string): number {
   if (!id) {
     console.error("Usage: pagekit inspect-vertical <id>");
@@ -120,6 +174,17 @@ function printFindings(findings: PlanFinding[]): void {
   }
 }
 
+function printContentFindings(findings: ContentFinding[]): void {
+  if (!findings.length) {
+    console.log("✓ No findings.");
+    return;
+  }
+  for (const f of findings) {
+    const icon = f.level === "error" ? "✗" : "⚠";
+    console.log(`${icon} [${f.level}] ${f.message}`);
+  }
+}
+
 function rel(root: string, p: string): string {
   return p.startsWith(root) ? p.slice(root.length + 1) : p;
 }
@@ -130,6 +195,7 @@ function printHelp(): void {
 Usage:
   pagekit validate [brief.yaml]          Validate a business brief against the schema
   pagekit plan [brief.yaml] [--dry-run]  Resolve vertical, plan the site, write reports
+  pagekit content [brief.yaml] [--dry-run]  Plan + generate placeholder content, write content draft
   pagekit inspect-vertical <id>          Print a vertical definition as JSON
   pagekit help                           Show this help
 

@@ -18,7 +18,7 @@ Legend: ✅ done · 🟡 partial · ⏳ planned
 | 5     | Section library               | 🟡     | section schema + representative sections; full set ⏳       |
 | 6     | Page blueprint system         | 🟡     | blueprints implemented in code; external YAML authoring ⏳  |
 | 7     | Site plan generator           | ✅     | routes, intents, services, legal pages, link graph, reports  |
-| 8     | Content generation contracts  | 🟡     | content-rules + skills authored; generator interface ⏳     |
+| 8     | Content generation contracts  | ✅     | typed `PageContent` model + placeholder mode + gates + CLI  |
 | 9     | Astro site generator          | ⏳     | not started                                                  |
 | 10    | SEO system                    | 🟡     | title/route rules in plan + gates; emitter/validator ⏳     |
 | 11    | Schema.org system             | 🟡     | conservative type resolution in plan; JSON-LD emitter ⏳    |
@@ -34,10 +34,12 @@ Legend: ✅ done · 🟡 partial · ⏳ planned
 
 ## Next slice
 
-1. **Content generation interface** (Phase 8) — a typed `PageContent` model and
-   a placeholder-content mode so the plan can be rendered end-to-end in tests.
-2. **Astro generator** (Phase 9) — render the `SitePlan` to a buildable site.
+1. ~~**Content generation interface** (Phase 8)~~ — ✅ done: typed `PageContent`
+   model, deterministic placeholder mode, content gates, `pagekit content` CLI.
+2. **Astro generator** (Phase 9) — render `SiteContent` (+ `SitePlan`) to a
+   buildable site. This is now unblocked: `content.json` is the render input.
 3. **SEO + schema emitters** (Phases 10–11) — per-page metadata + JSON-LD with
-   their validators wired into the gates.
+   their validators wired into the gates. The `metaDescription` field already
+   travels with each page.
 4. **First full example site** (Phase 15) — the midwifery brief, generated and
    committed under `examples/generated-sites/`.

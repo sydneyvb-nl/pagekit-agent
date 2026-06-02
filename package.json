@@ -16,6 +16,7 @@
     "test": "pnpm -r test",
     "validate:brief": "pnpm --filter @pagekit/generator exec tsx src/cli.ts validate",
     "plan": "pnpm --filter @pagekit/generator exec tsx src/cli.ts plan",
+    "content": "pnpm --filter @pagekit/generator exec tsx src/cli.ts content",
     "inspect:vertical": "pnpm --filter @pagekit/generator exec tsx src/cli.ts inspect-vertical"
   },
   "keywords": [

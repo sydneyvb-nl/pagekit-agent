@@ -1,6 +1,6 @@
 # Project status
 
-**Version:** 0.1 (foundation) · **Updated:** 2026-06-01
+**Version:** 0.1 (foundation) · **Updated:** 2026-06-02
 
 A snapshot of what is real today versus what is planned. For the phase-by-phase
 breakdown see [roadmap.md](roadmap.md); this page is the honest one-glance view.
@@ -22,7 +22,15 @@ works end to end and is covered by tests + CI.
   link minimum, EU-regulated-form consent flag.
 - **Report set.** `site-plan.md`, `site-map.yaml`, `assumptions.md`,
   `missing-inputs.md`.
-- **CLI.** `validate`, `plan` (+`--dry-run`), `inspect-vertical`.
+- **Content interface.** Typed `PageContent`/`SiteContent` model
+  (`packages/generator/src/content/`) with per-field provenance (brief /
+  generated / placeholder) and a deterministic, safe-by-default **placeholder
+  mode**: it reuses brief facts, writes structural copy, and emits an explicit
+  `TODO:` for anything missing or forbidden to invent (testimonials, prices,
+  hours, credentials, team). Content quality gates plus a `content.json` /
+  `content-draft.md` / `content-todos.md` output set.
+- **CLI.** `validate`, `plan` (+`--dry-run`), `content` (+`--dry-run`),
+  `inspect-vertical`.
 - **Supporting config.** Design tokens + 6 theme presets, a representative
   section library, content-safety rules, agent skills, one committed example.
 
@@ -30,8 +38,7 @@ works end to end and is covered by tests + CI.
 
 Do not claim these work. They are scaffolded as docs/roadmap only:
 
-- Content-generation interface (typed `PageContent`, placeholder mode)
-- Astro site rendering and `pnpm build`
+- Astro site rendering and `pnpm build` (consumes `content.json`)
 - SEO + schema.org JSON-LD emitters and their validators
 - Accessibility runners (Axe / Playwright)
 - Form rendering (Netlify / Formspree / webhook / mailto)
@@ -51,5 +58,6 @@ Do not claim these work. They are scaffolded as docs/roadmap only:
 
 ## Quality bar right now
 
-`pnpm -r lint` (typecheck), `pnpm test` (13 tests), `pnpm validate:brief`, and
-`pnpm plan --dry-run` all run in CI on every push and PR.
+`pnpm -r lint` (typecheck), `pnpm test` (24 tests), `pnpm validate:brief`,
+`pnpm plan --dry-run`, and `pnpm content --dry-run` all run in CI on every push
+and PR.
