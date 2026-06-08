@@ -153,15 +153,15 @@ function linkPages(pages: PlannedPage[], servicePages: PlannedPage[]): void {
 
     if (page.pageType === "home") {
       for (const sp of servicePages) links.push({ to: sp.route, anchor: titleToAnchor(sp.title) });
-      if (contact) links.push({ to: contact.route, anchor: "Neem contact op" });
+      if (contact) links.push({ to: contact.route, anchor: "Contact us" });
     } else if (page.pageType === "service") {
-      if (services) links.push({ to: services.route, anchor: "Alle diensten" });
+      if (services) links.push({ to: services.route, anchor: "All services" });
       const others = servicePages.filter((sp) => sp.route !== page.route).slice(0, 2);
       for (const sp of others) links.push({ to: sp.route, anchor: titleToAnchor(sp.title) });
-      if (contact) links.push({ to: contact.route, anchor: "Maak een afspraak" });
+      if (contact) links.push({ to: contact.route, anchor: "Book an appointment" });
     } else {
       if (home) links.push({ to: home.route, anchor: "Home" });
-      if (services) links.push({ to: services.route, anchor: "Diensten" });
+      if (services) links.push({ to: services.route, anchor: "Services" });
       if (contact && contact.route !== page.route)
         links.push({ to: contact.route, anchor: "Contact" });
     }

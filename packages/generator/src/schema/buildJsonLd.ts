@@ -67,7 +67,9 @@ function localBusinessNode(type: string, brief: Brief, siteUrl: string | null): 
   node.description = b.short_description;
   if (b.contact.phone) node.telephone = b.contact.phone;
   if (b.contact.email) node.email = b.contact.email;
-  if (b.contact.address) node.address = b.contact.address;
+  if (b.contact.address) {
+    node.address = { "@type": "PostalAddress", streetAddress: b.contact.address };
+  }
   const areas = areaServed(brief);
   if (areas.length) node.areaServed = areas;
   const logo = logoUrl(brief, siteUrl);
@@ -124,7 +126,7 @@ function serviceNode(
   const node: JsonLdNode = {
     "@context": CONTEXT,
     "@type": "Service",
-    name: serviceName ?? "Dienst",
+    name: serviceName ?? "Service",
     serviceType: serviceName ?? undefined,
     provider: {
       "@type": businessType ?? "LocalBusiness",

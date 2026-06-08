@@ -11,29 +11,29 @@ pages:
       - WebSite
       - Organization
     internal_links:
-      - /diensten/zwangerschapscontroles/
-      - /diensten/echo-s/
-      - /diensten/kraamzorg/
+      - /services/zwangerschapscontroles/
+      - /services/echo-s/
+      - /services/kraamzorg/
       - /contact/
-  - route: /diensten/
+  - route: /services/
     type: services
-    title: Diensten | Verloskundigenpraktijk Example
+    title: Services | Verloskundigenpraktijk Example
     schema:
       - MedicalBusiness
       - BreadcrumbList
     internal_links:
       - /
-      - /diensten/
+      - /services/
       - /contact/
-  - route: /over-ons/
+  - route: /about/
     type: about
-    title: Over ons | Verloskundigenpraktijk Example
+    title: About us | Verloskundigenpraktijk Example
     schema:
       - MedicalBusiness
       - BreadcrumbList
     internal_links:
       - /
-      - /diensten/
+      - /services/
       - /contact/
   - route: /team/
     type: team
@@ -43,17 +43,17 @@ pages:
       - BreadcrumbList
     internal_links:
       - /
-      - /diensten/
+      - /services/
       - /contact/
-  - route: /locatie/
+  - route: /location/
     type: location
-    title: Locatie & route | Verloskundigenpraktijk Example
+    title: Location & directions | Verloskundigenpraktijk Example
     schema:
       - MedicalBusiness
       - BreadcrumbList
     internal_links:
       - /
-      - /diensten/
+      - /services/
       - /contact/
   - route: /contact/
     type: contact
@@ -64,35 +64,35 @@ pages:
       - BreadcrumbList
     internal_links:
       - /
-      - /diensten/
-  - route: /veelgestelde-vragen/
+      - /services/
+  - route: /faq/
     type: faq
-    title: Veelgestelde vragen | Verloskundigenpraktijk Example
+    title: Frequently asked questions | Verloskundigenpraktijk Example
     schema:
       - FAQPage
       - BreadcrumbList
     internal_links:
       - /
-      - /diensten/
+      - /services/
       - /contact/
   - route: /privacy/
     type: privacy
-    title: Privacyverklaring | Verloskundigenpraktijk Example
+    title: Privacy policy | Verloskundigenpraktijk Example
     schema:
       - BreadcrumbList
     internal_links: []
   - route: /404/
     type: "404"
-    title: Pagina niet gevonden | Verloskundigenpraktijk Example
+    title: Page not found | Verloskundigenpraktijk Example
     schema: []
     internal_links: []
   - route: /cookies/
     type: cookies
-    title: Cookiebeleid | Verloskundigenpraktijk Example
+    title: Cookie policy | Verloskundigenpraktijk Example
     schema:
       - BreadcrumbList
     internal_links: []
-  - route: /diensten/zwangerschapscontroles/
+  - route: /services/zwangerschapscontroles/
     type: service
     title: Zwangerschapscontroles in Den Haag | Verloskundigenpraktijk Example
     schema:
@@ -100,11 +100,11 @@ pages:
       - MedicalBusiness
       - BreadcrumbList
     internal_links:
-      - /diensten/
-      - /diensten/echo-s/
-      - /diensten/kraamzorg/
+      - /services/
+      - /services/echo-s/
+      - /services/kraamzorg/
       - /contact/
-  - route: /diensten/echo-s/
+  - route: /services/echo-s/
     type: service
     title: Echo's in Den Haag | Verloskundigenpraktijk Example
     schema:
@@ -112,11 +112,11 @@ pages:
       - MedicalBusiness
       - BreadcrumbList
     internal_links:
-      - /diensten/
-      - /diensten/zwangerschapscontroles/
-      - /diensten/kraamzorg/
+      - /services/
+      - /services/zwangerschapscontroles/
+      - /services/kraamzorg/
       - /contact/
-  - route: /diensten/kraamzorg/
+  - route: /services/kraamzorg/
     type: service
     title: Kraamzorg in Den Haag | Verloskundigenpraktijk Example
     schema:
@@ -124,7 +124,7 @@ pages:
       - MedicalBusiness
       - BreadcrumbList
     internal_links:
-      - /diensten/
-      - /diensten/zwangerschapscontroles/
-      - /diensten/echo-s/
+      - /services/
+      - /services/zwangerschapscontroles/
+      - /services/echo-s/
       - /contact/

@@ -20,7 +20,7 @@ The user adds a new service, or asks to add a service page.
 ## Steps
 
 1. Add the service to `business.services` in the brief.
-2. `pnpm validate:brief` then `pnpm plan` — the new `/diensten/<slug>/` route and
+2. `pnpm validate:brief` then `pnpm plan` — the new `/services/<slug>/` route and
    its internal links appear in the plan automatically.
 3. Generate the service page content: what it is · who it's for · how it works ·
    what to expect · when to contact · next step.
@@ -30,7 +30,7 @@ The user adds a new service, or asks to add a service page.
 ## Outputs
 
 - Updated `generated/site-map.yaml` with the new route.
-- _(later)_ `site/src/content/pages/diensten/<slug>.mdx`.
+- _(later)_ `site/src/content/pages/services/<slug>.mdx`.
 
 ## Validation
 

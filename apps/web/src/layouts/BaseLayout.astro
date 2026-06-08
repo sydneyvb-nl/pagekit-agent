@@ -4,6 +4,7 @@ import {
   themeRootCss,
   navPages,
   footerPages,
+  safeJsonLd,
   type PageContent,
   type SiteContent,
   type ResolvedTheme,
@@ -17,15 +18,15 @@ interface Props {
 
 const NAV_LABELS: Record<string, string> = {
   home: "Home",
-  services: "Diensten",
-  about: "Over ons",
+  services: "Services",
+  about: "About",
   team: "Team",
-  location: "Locatie",
-  faq: "Veelgestelde vragen",
+  location: "Location",
+  faq: "FAQ",
   contact: "Contact",
   privacy: "Privacy",
   cookies: "Cookies",
-  terms: "Voorwaarden",
+  terms: "Terms",
 };
 
 function navLabel(p: PageContent): string {
@@ -58,18 +59,18 @@ const year = new Date().getFullYear();
 
     {
       page.jsonLd.map((node) => (
-        <script type="application/ld+json" set:html={JSON.stringify(node)} />
+        <script type="application/ld+json" set:html={safeJsonLd(node)} />
       ))
     }
 
     <style set:html={themeRootCss(theme)}></style>
   </head>
   <body>
-    <a class="skip-link" href="#main">Naar inhoud</a>
+    <a class="skip-link" href="#main">Skip to content</a>
     <header class="site-header">
       <div class="container">
         <a class="wordmark" href="/">{site.business}</a>
-        <nav class="site-nav" aria-label="Hoofdmenu">
+        <nav class="site-nav" aria-label="Main navigation">
           {
             nav.map((p) => (
               <a href={p.route} aria-current={p.route === page.route ? "page" : undefined}>
@@ -90,7 +91,7 @@ const year = new Date().getFullYear();
         <span>© {year} {site.business}</span>
         {
           legal.length > 0 && (
-            <nav aria-label="Juridisch">
+            <nav aria-label="Legal">
               {legal.map((p) => (
                 <a href={p.route}>{navLabel(p)}</a>
               ))}

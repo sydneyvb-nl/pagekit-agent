@@ -43,7 +43,7 @@ describe("planSite", () => {
   it("creates one detail page per service", () => {
     const servicePages = plan.pages.filter((p) => p.pageType === "service");
     expect(servicePages).toHaveLength(3);
-    expect(servicePages.map((p) => p.route)).toContain("/diensten/echo-s/");
+    expect(servicePages.map((p) => p.route)).toContain("/services/echo-s/");
   });
 
   it("always injects privacy + 404, and cookies when integrations are active", () => {

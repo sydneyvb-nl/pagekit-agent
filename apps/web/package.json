@@ -8,9 +8,15 @@
   "scripts": {
     "dev": "astro dev",
     "build": "astro build",
-    "preview": "astro preview"
+    "preview": "astro preview",
+    "lint": "astro check"
   },
   "dependencies": {
+    "@pagekit/generator": "workspace:*",
     "astro": "5.18.1"
+  },
+  "devDependencies": {
+    "@astrojs/check": "0.9.6",
+    "typescript": "6.0.3"
   }
 }

@@ -1,8 +1,8 @@
 # Architecture
 
 pagekit-agent is a deterministic TypeScript generator. A validated business
-brief flows through a fixed pipeline into a structured site plan and a set of
-human- and machine-readable reports.
+brief flows through a fixed pipeline into a structured site plan, resolved
+content, and a deployable static site.
 
 ## Pipeline
 
@@ -15,14 +15,20 @@ Vertical
   ↓  planSite (blueprints + brief services)
 SitePlan  ── routes, sections, schema, internal-link graph, image slots
   ↓  validatePlan (structural quality gates)
-findings (errors / warnings)
   ↓  writeReports
 generated/site-plan.md, site-map.yaml, assumptions.md, missing-inputs.md
+  ↓  generateContent (placeholder or agent-filled copy)
+SiteContent  ── per-section copy with provenance + SEO + JSON-LD
+  ↓  validateContent + validateSeo
+  ↓  resolveTheme + writeContent + writeMissingInputs (merged gaps)
+generated/content.json, content-draft.md, content-todos.md, theme.json
+  ↓  Astro static build (apps/web)
+deployable HTML/CSS + sitemap.xml + robots.txt
 ```
 
-Later roadmap stages extend this with content generation, Astro rendering,
-SEO/schema emission, accessibility runners, and the Webstudio handoff. None of
-those change the contract above; they consume the same `SitePlan`.
+Later roadmap stages add accessibility runners and the Webstudio handoff. None
+of those change the contract above; they consume the same `SitePlan` and
+`SiteContent`.
 
 ## Key modules (`packages/generator/src`)
 
@@ -36,7 +42,24 @@ those change the contract above; they consume the same `SitePlan`.
 | `plan/planSite.ts`           | Expand brief + vertical into a full `SitePlan`            |
 | `plan/validatePlan.ts`       | Structural quality gates (blocking vs. warning)           |
 | `report/writeReports.ts`     | Emit the "no silent magic" report set                     |
-| `cli.ts`                     | `validate` / `plan` / `inspect-vertical` commands         |
+| `content/model.ts`           | Typed `SiteContent` / `PageContent` contract              |
+| `content/generateContent.ts` | Deterministic placeholder content (safe-by-default)       |
+| `content/validateContent.ts` | Content structure gates                                   |
+| `content/writeContent.ts`    | Persist `content.json` + human-readable drafts              |
+| `theme/resolveTheme.ts`      | Theme preset + tokens → CSS custom properties               |
+| `seo/buildSeo.ts`            | Per-page canonical, robots, OpenGraph                     |
+| `seo/validateSeo.ts`         | SEO / JSON-LD quality gates                                 |
+| `schema/buildJsonLd.ts`      | Safe-by-default schema.org JSON-LD                          |
+| `cli.ts`                     | `validate` / `plan` / `content` / `inspect-vertical`      |
+
+## Renderer (`apps/web`)
+
+| Module              | Responsibility                                      |
+| ------------------- | --------------------------------------------------- |
+| `src/lib/site.ts`   | Load `content.json` / `theme.json`; shared types from `@pagekit/generator` |
+| `src/components/`   | Section-id → Astro component registry               |
+| `src/layouts/`      | `<head>` SEO, JSON-LD, theme CSS variables, nav     |
+| `src/pages/`        | Static paths from content; sitemap + robots.txt     |
 
 ## Design principles
 

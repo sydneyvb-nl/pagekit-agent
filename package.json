@@ -12,7 +12,7 @@
   "packageManager": "pnpm@11.5.0",
   "scripts": {
     "build": "pnpm --filter \"./packages/*\" build",
-    "build:site": "pnpm content && pnpm --filter @pagekit/web build",
+    "build:site": "pnpm --filter @pagekit/generator build && pnpm content && pnpm --filter @pagekit/web build",
     "preview:site": "pnpm --filter @pagekit/web preview",
     "lint": "pnpm -r lint",
     "test": "pnpm -r test",

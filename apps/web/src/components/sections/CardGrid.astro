@@ -4,13 +4,17 @@ import Field from "../Field.astro";
 
 interface Props {
   section: SectionContent;
+  headingLevel: "h1" | "h2";
 }
-const { section } = Astro.props;
+const { section, headingLevel } = Astro.props;
+const HeadingTag = headingLevel;
 ---
 
 <section class={section.section.replace(/\./g, "-")}>
   <div class="container">
-    {section.heading && <h2><Field field={section.heading} /></h2>}
+    {section.heading && (
+      <HeadingTag><Field field={section.heading} /></HeadingTag>
+    )}
     {section.body.map((b) => <Field field={b} as="p" />)}
     {
       section.items.length > 0 && (

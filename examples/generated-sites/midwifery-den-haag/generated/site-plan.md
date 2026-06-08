@@ -26,15 +26,15 @@
 - **Min words:** 400
 - **Image slots:** hero, services
 - **Internal links:**
-  - Zwangerschapscontroles in Den Haag → `/diensten/zwangerschapscontroles/`
-  - Echo's in Den Haag → `/diensten/echo-s/`
-  - Kraamzorg in Den Haag → `/diensten/kraamzorg/`
-  - Neem contact op → `/contact/`
+  - Zwangerschapscontroles in Den Haag → `/services/zwangerschapscontroles/`
+  - Echo's in Den Haag → `/services/echo-s/`
+  - Kraamzorg in Den Haag → `/services/kraamzorg/`
+  - Contact us → `/contact/`
 
-### /diensten/
+### /services/
 
 - **Type:** services
-- **Title:** Diensten | Verloskundigenpraktijk Example
+- **Title:** Services | Verloskundigenpraktijk Example
 - **Intent:** Give an overview of all services and route to detail pages.
 - **Sections:** hero.service, services-grid, final-cta
 - **Schema:** MedicalBusiness, BreadcrumbList
@@ -42,13 +42,13 @@
 - **Image slots:** hero
 - **Internal links:**
   - Home → `/`
-  - Diensten → `/diensten/`
+  - Services → `/services/`
   - Contact → `/contact/`
 
-### /over-ons/
+### /about/
 
 - **Type:** about
-- **Title:** Over ons | Verloskundigenpraktijk Example
+- **Title:** About us | Verloskundigenpraktijk Example
 - **Intent:** Explain who the business is and why to trust them.
 - **Sections:** hero.local-service, rich-text, trust-bar, final-cta
 - **Schema:** MedicalBusiness, BreadcrumbList
@@ -56,7 +56,7 @@
 - **Image slots:** hero
 - **Internal links:**
   - Home → `/`
-  - Diensten → `/diensten/`
+  - Services → `/services/`
   - Contact → `/contact/`
 
 ### /team/
@@ -70,13 +70,13 @@
 - **Image slots:** hero
 - **Internal links:**
   - Home → `/`
-  - Diensten → `/diensten/`
+  - Services → `/services/`
   - Contact → `/contact/`
 
-### /locatie/
+### /location/
 
 - **Type:** location
-- **Title:** Locatie & route | Verloskundigenpraktijk Example
+- **Title:** Location & directions | Verloskundigenpraktijk Example
 - **Intent:** Help visitors find and reach the business; reinforce local SEO.
 - **Sections:** hero.location, location-map, service-area, contact-card
 - **Schema:** MedicalBusiness, BreadcrumbList
@@ -84,7 +84,7 @@
 - **Image slots:** hero
 - **Internal links:**
   - Home → `/`
-  - Diensten → `/diensten/`
+  - Services → `/services/`
   - Contact → `/contact/`
 
 ### /contact/
@@ -98,12 +98,12 @@
 - **Image slots:** hero
 - **Internal links:**
   - Home → `/`
-  - Diensten → `/diensten/`
+  - Services → `/services/`
 
-### /veelgestelde-vragen/
+### /faq/
 
 - **Type:** faq
-- **Title:** Veelgestelde vragen | Verloskundigenpraktijk Example
+- **Title:** Frequently asked questions | Verloskundigenpraktijk Example
 - **Intent:** Answer common questions; reduce friction; capture long-tail SEO.
 - **Sections:** hero.local-service, faq, final-cta
 - **Schema:** FAQPage, BreadcrumbList
@@ -111,13 +111,13 @@
 - **Image slots:** hero
 - **Internal links:**
   - Home → `/`
-  - Diensten → `/diensten/`
+  - Services → `/services/`
   - Contact → `/contact/`
 
 ### /privacy/
 
 - **Type:** privacy
-- **Title:** Privacyverklaring | Verloskundigenpraktijk Example
+- **Title:** Privacy policy | Verloskundigenpraktijk Example
 - **Intent:** Legally required privacy statement.
 - **Sections:** rich-text
 - **Schema:** BreadcrumbList
@@ -127,7 +127,7 @@
 ### /404/
 
 - **Type:** 404
-- **Title:** Pagina niet gevonden | Verloskundigenpraktijk Example
+- **Title:** Page not found | Verloskundigenpraktijk Example
 - **Intent:** Friendly not-found page that routes back to key pages.
 - **Sections:** rich-text, final-cta
 - **Schema:** (none)
@@ -137,14 +137,14 @@
 ### /cookies/
 
 - **Type:** cookies
-- **Title:** Cookiebeleid | Verloskundigenpraktijk Example
+- **Title:** Cookie policy | Verloskundigenpraktijk Example
 - **Intent:** Cookie policy where analytics/forms set cookies.
 - **Sections:** rich-text
 - **Schema:** BreadcrumbList
 - **Min words:** 80
 - **Image slots:** hero
 
-### /diensten/zwangerschapscontroles/
+### /services/zwangerschapscontroles/
 
 - **Type:** service
 - **Title:** Zwangerschapscontroles in Den Haag | Verloskundigenpraktijk Example
@@ -155,12 +155,12 @@
 - **Min words:** 700
 - **Image slots:** hero, process
 - **Internal links:**
-  - Alle diensten → `/diensten/`
-  - Echo's in Den Haag → `/diensten/echo-s/`
-  - Kraamzorg in Den Haag → `/diensten/kraamzorg/`
-  - Maak een afspraak → `/contact/`
+  - All services → `/services/`
+  - Echo's in Den Haag → `/services/echo-s/`
+  - Kraamzorg in Den Haag → `/services/kraamzorg/`
+  - Book an appointment → `/contact/`
 
-### /diensten/echo-s/
+### /services/echo-s/
 
 - **Type:** service
 - **Title:** Echo's in Den Haag | Verloskundigenpraktijk Example
@@ -171,12 +171,12 @@
 - **Min words:** 700
 - **Image slots:** hero, process
 - **Internal links:**
-  - Alle diensten → `/diensten/`
-  - Zwangerschapscontroles in Den Haag → `/diensten/zwangerschapscontroles/`
-  - Kraamzorg in Den Haag → `/diensten/kraamzorg/`
-  - Maak een afspraak → `/contact/`
+  - All services → `/services/`
+  - Zwangerschapscontroles in Den Haag → `/services/zwangerschapscontroles/`
+  - Kraamzorg in Den Haag → `/services/kraamzorg/`
+  - Book an appointment → `/contact/`
 
-### /diensten/kraamzorg/
+### /services/kraamzorg/
 
 - **Type:** service
 - **Title:** Kraamzorg in Den Haag | Verloskundigenpraktijk Example
@@ -187,7 +187,7 @@
 - **Min words:** 700
 - **Image slots:** hero, process
 - **Internal links:**
-  - Alle diensten → `/diensten/`
-  - Zwangerschapscontroles in Den Haag → `/diensten/zwangerschapscontroles/`
-  - Echo's in Den Haag → `/diensten/echo-s/`
-  - Maak een afspraak → `/contact/`
+  - All services → `/services/`
+  - Zwangerschapscontroles in Den Haag → `/services/zwangerschapscontroles/`
+  - Echo's in Den Haag → `/services/echo-s/`
+  - Book an appointment → `/contact/`

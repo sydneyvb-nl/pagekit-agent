@@ -16,5 +16,7 @@ const { page, site, theme } = Astro.props;
 ---
 
 <BaseLayout page={page} site={site} theme={theme}>
-  {page.sections.map((section) => <Section section={section} />)}
+  {page.sections.map((section, index) => (
+    <Section section={section} page={page} sectionIndex={index} />
+  ))}
 </BaseLayout>

@@ -70,7 +70,7 @@ describe("generateContent (placeholder mode)", () => {
   });
 
   it("derives the service name for each detail page from the brief", () => {
-    const echo = content.pages.find((p) => p.route === "/diensten/echo-s/")!;
+    const echo = content.pages.find((p) => p.route === "/services/echo-s/")!;
     const hero = echo.sections.find((s) => s.section.startsWith("hero"))!;
     expect(hero.heading?.value).toContain("Echo's");
   });

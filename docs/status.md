@@ -74,7 +74,7 @@ Do not claim these work. They are scaffolded as docs/roadmap only:
 
 ## Quality bar right now
 
-`pnpm -r lint` (typecheck), `pnpm test` (39 tests), `pnpm validate:brief`,
+`pnpm -r lint` (typecheck), `pnpm test` (41 tests), `pnpm validate:brief`,
 `pnpm plan --dry-run`, `pnpm content --dry-run`, and `pnpm build:site` (full
 Astro static build of the example brief) all run in CI on every push and PR.
 

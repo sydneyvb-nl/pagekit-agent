@@ -4,7 +4,7 @@ import { loadBrief } from "./brief/loadBrief.js";
 import { resolveVertical } from "./vertical/resolveVertical.js";
 import { planSite } from "./plan/planSite.js";
 import { validatePlan, type PlanFinding } from "./plan/validatePlan.js";
-import { writeReports } from "./report/writeReports.js";
+import { writeReports, writeMissingInputs } from "./report/writeReports.js";
 import { generateContent } from "./content/generateContent.js";
 import { validateContent, type ContentFinding } from "./content/validateContent.js";
 import { validateSeo } from "./seo/validateSeo.js";
@@ -128,9 +128,11 @@ function cmdContent(briefPath: string | undefined, dryRun: boolean): number {
     const outDir = generatedDir(root);
     const written = writeContent(content, outDir);
     writeFileSync(join(outDir, "theme.json"), JSON.stringify(theme, null, 2) + "\n");
-    console.log(`\n✓ Wrote ${written.length + 1} content file(s) to ${rel(root, outDir)}/`);
+    writeMissingInputs(plan, content.todos, outDir);
+    console.log(`\n✓ Wrote ${written.length + 2} file(s) to ${rel(root, outDir)}/`);
     for (const w of written) console.log(`  - ${w.file}`);
     console.log(`  - theme.json (${theme.name})`);
+    console.log(`  - missing-inputs.md (merged plan + content gaps)`);
   } else {
     console.log(
       `\n(dry run: ${content.pages.length} pages, ${content.todos.length} TODOs, theme '${theme.name}', no files written)`,

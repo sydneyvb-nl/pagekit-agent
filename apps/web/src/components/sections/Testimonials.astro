@@ -4,15 +4,19 @@ import Field from "../Field.astro";
 
 interface Props {
   section: SectionContent;
+  headingLevel: "h1" | "h2";
 }
-const { section } = Astro.props;
+const { section, headingLevel } = Astro.props;
+const HeadingTag = headingLevel;
 // Testimonials are never invented. When the brief supplies none, the section
 // shows an honest placeholder rather than fabricated reviews.
 ---
 
 <section class="testimonials">
   <div class="container">
-    {section.heading && <h2><Field field={section.heading} /></h2>}
+    {section.heading && (
+      <HeadingTag><Field field={section.heading} /></HeadingTag>
+    )}
     {
       section.items.length > 0 ? (
         <ul class="grid">
@@ -24,7 +28,7 @@ const { section } = Astro.props;
           ))}
         </ul>
       ) : (
-        <p><span data-placeholder="" title="Placeholder — needs real content">Nog geen ervaringen toegevoegd.</span></p>
+        <p><span data-placeholder="" title="Placeholder — needs real content">No testimonials added yet.</span></p>
       )
     }
   </div>

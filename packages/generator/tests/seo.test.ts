@@ -59,8 +59,8 @@ describe("SEO metadata", () => {
 
   it("falls back to a relative canonical and no og:url without site_url", () => {
     const content = build();
-    const service = content.pages.find((p) => p.route === "/diensten/echo-s/")!;
-    expect(service.seo.canonical).toBe("/diensten/echo-s/");
+    const service = content.pages.find((p) => p.route === "/services/echo-s/")!;
+    expect(service.seo.canonical).toBe("/services/echo-s/");
     expect(service.seo.canonicalAbsolute).toBe(false);
     expect(service.seo.openGraph.url).toBeNull();
   });
@@ -82,6 +82,10 @@ describe("JSON-LD", () => {
     const business = home.jsonLd.find((n) => n["@type"] === "MedicalBusiness")!;
     expect(business.name).toBe("Verloskundigenpraktijk Example");
     expect(business.telephone).toBe("+31 70 000 0000");
+    expect(business.address).toEqual({
+      "@type": "PostalAddress",
+      streetAddress: "Voorbeeldstraat 1, Den Haag",
+    });
     expect(business.areaServed).toEqual(["Den Haag", "Rijswijk"]);
     // Never invents reviews/ratings/hours.
     expect(business.aggregateRating).toBeUndefined();
@@ -96,18 +100,18 @@ describe("JSON-LD", () => {
   });
 
   it("emits a Service node with provider on a service page", () => {
-    const service = content.pages.find((p) => p.route === "/diensten/echo-s/")!;
+    const service = content.pages.find((p) => p.route === "/services/echo-s/")!;
     const node = service.jsonLd.find((n) => n["@type"] === "Service")!;
     expect(node.name).toBe("Echo's");
     expect((node.provider as Record<string, unknown>).name).toBe("Verloskundigenpraktijk Example");
   });
 
   it("builds a BreadcrumbList with absolute item URLs", () => {
-    const service = content.pages.find((p) => p.route === "/diensten/echo-s/")!;
+    const service = content.pages.find((p) => p.route === "/services/echo-s/")!;
     const crumb = service.jsonLd.find((n) => n["@type"] === "BreadcrumbList")!;
     const items = crumb.itemListElement as Array<Record<string, unknown>>;
     expect(items[0]!.item).toBe("https://praktijk.nl/");
-    expect(items[items.length - 1]!.item).toBe("https://praktijk.nl/diensten/echo-s/");
+    expect(items[items.length - 1]!.item).toBe("https://praktijk.nl/services/echo-s/");
   });
 
   it("emits a FAQPage only for answered questions, skipping placeholders", () => {

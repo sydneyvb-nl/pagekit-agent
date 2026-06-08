@@ -63,7 +63,8 @@ function buildPage(
     plan,
     brief,
     business: brief.business,
-    serviceName: page.pageType === "service" ? serviceForRoute(page.route, brief) : null,
+    serviceName:
+      page.pageType === "service" ? serviceForRoute(page.route, brief, plan) : null,
   };
 
   const sections = page.sections.map((section) => buildSection(section, page, ctx));
@@ -152,7 +153,7 @@ function buildHero(section: string, page: PlannedPage, ctx: PageCtx): SectionCon
 
 function buildTrustBar(section: string, _page: PlannedPage, _ctx: PageCtx): SectionContent {
   // Trust signals are facts (certs, years, registrations) we must not invent.
-  return base(section, generated("Waarom kiezen voor ons"), [], [], null, [
+  return base(section, generated("Why choose us"), [], [], null, [
     `TODO: add verifiable trust signals for the trust bar (registrations, years active, affiliations) — never invent these.`,
   ]);
 }
@@ -162,51 +163,51 @@ function buildServicesGrid(section: string, _page: PlannedPage, ctx: PageCtx): S
   const servicePages = plan.pages.filter((p) => p.pageType === "service");
   const items: ContentItem[] = business.services.map((service, i) => ({
     title: briefField(service),
-    body: generated(`Wat ${service.toLowerCase()} inhoudt en voor wie het bedoeld is.`),
+    body: generated(`What ${service.toLowerCase()} involves and who it is for.`),
     href: servicePages[i]?.route,
   }));
-  return base(section, generated("Onze diensten"), [], items, primaryCta(ctx), []);
+  return base(section, generated("Our services"), [], items, primaryCta(ctx), []);
 }
 
 function buildServiceSummary(section: string, _page: PlannedPage, ctx: PageCtx): SectionContent {
-  const service = ctx.serviceName ?? "deze dienst";
+  const service = ctx.serviceName ?? "this service";
   const body = [
     generated(
-      `Wat ${service.toLowerCase()} is, voor wie het bedoeld is en wanneer u contact opneemt.`,
+      `What ${service.toLowerCase()} is, who it is for, and when to get in touch.`,
     ),
   ];
-  return base(section, generated(`Over ${service.toLowerCase()}`), body, [], null, [
+  return base(section, generated(`About ${service.toLowerCase()}`), body, [], null, [
     `TODO: describe the specifics of "${service}" — scope, who it is for, what is included.`,
   ]);
 }
 
 function buildBenefits(section: string, _page: PlannedPage, ctx: PageCtx): SectionContent {
-  const service = ctx.serviceName ?? "deze dienst";
+  const service = ctx.serviceName ?? "this service";
   const items: ContentItem[] = [1, 2, 3].map((n) => ({
-    title: placeholder(`Voordeel ${n}`),
-    body: placeholder(`TODO: concreet voordeel van ${service.toLowerCase()}.`),
+    title: placeholder(`Benefit ${n}`),
+    body: placeholder(`TODO: concrete benefit of ${service.toLowerCase()}.`),
   }));
-  return base(section, generated("Wat u kunt verwachten"), [], items, null, [
+  return base(section, generated("What to expect"), [], items, null, [
     `TODO: list the concrete, substantiated benefits of "${service}" (no unprovable claims).`,
   ]);
 }
 
 function buildProcessSteps(section: string, _page: PlannedPage, ctx: PageCtx): SectionContent {
   const items: ContentItem[] = [
-    { title: generated("1. Contact"), body: generated("U neemt contact op of maakt een afspraak.") },
-    { title: generated("2. Intake"), body: generated("We bespreken uw situatie en wensen.") },
+    { title: generated("1. Contact"), body: generated("You get in touch or book an appointment.") },
+    { title: generated("2. Intake"), body: generated("We discuss your situation and what you need.") },
     {
-      title: generated("3. Vervolg"),
-      body: placeholder("TODO: beschrijf de concrete vervolgstappen."),
+      title: generated("3. Next steps"),
+      body: placeholder("TODO: describe the concrete next steps."),
     },
   ];
   const todos = [`TODO: confirm the real step-by-step process and replace step 3 with specifics.`];
-  return base(section, generated("Hoe het werkt"), [], items, primaryCta(ctx), todos);
+  return base(section, generated("How it works"), [], items, primaryCta(ctx), todos);
 }
 
 function buildTestimonials(section: string, _page: PlannedPage, _ctx: PageCtx): SectionContent {
   // Never invent testimonials or review scores. Emit empty with a TODO.
-  return base(section, generated("Ervaringen"), [], [], null, [
+  return base(section, generated("Testimonials"), [], [], null, [
     `TODO: add real testimonials/reviews with attribution — these must never be invented.`,
   ]);
 }
@@ -214,15 +215,15 @@ function buildTestimonials(section: string, _page: PlannedPage, _ctx: PageCtx): 
 function buildFaq(section: string, _page: PlannedPage, ctx: PageCtx): SectionContent {
   const items: ContentItem[] = [
     {
-      title: generated(`Hoe maak ik een afspraak bij ${ctx.business.name}?`),
-      body: placeholder("TODO: leg uit hoe iemand een afspraak maakt."),
+      title: generated(`How do I book an appointment with ${ctx.business.name}?`),
+      body: placeholder("TODO: explain how someone books an appointment."),
     },
     {
-      title: generated(`In welke regio werkt ${ctx.business.name}?`),
-      body: generated(`We werken in en rond ${ctx.business.city}.`),
+      title: generated(`Which area does ${ctx.business.name} serve?`),
+      body: generated(`We serve ${ctx.business.city} and the surrounding area.`),
     },
   ];
-  return base(section, generated("Veelgestelde vragen"), [], items, null, [
+  return base(section, generated("Frequently asked questions"), [], items, null, [
     `TODO: replace placeholder FAQ answers with verified, specific answers.`,
   ]);
 }
@@ -232,17 +233,17 @@ function buildRelatedServices(section: string, page: PlannedPage, ctx: PageCtx):
     .filter((p) => p.pageType === "service" && p.route !== page.route)
     .slice(0, 3);
   const items: ContentItem[] = others.map((p) => ({
-    title: generated(serviceForRoute(p.route, ctx.brief) ?? stripSuffix(p.title)),
-    body: generated("Bekijk deze gerelateerde dienst."),
+    title: generated(serviceForRoute(p.route, ctx.brief, ctx.plan) ?? stripSuffix(p.title)),
+    body: generated("View this related service."),
     href: p.route,
   }));
-  return base(section, generated("Gerelateerde diensten"), [], items, null, []);
+  return base(section, generated("Related services"), [], items, null, []);
 }
 
 function buildFinalCta(section: string, _page: PlannedPage, ctx: PageCtx): SectionContent {
   const cta = primaryCta(ctx);
-  const heading = generated("Klaar om de volgende stap te zetten?");
-  const body = [generated(`Neem contact op met ${ctx.business.name}.`)];
+  const heading = generated("Ready to take the next step?");
+  const body = [generated(`Get in touch with ${ctx.business.name}.`)];
   return base(section, heading, body, [], cta, cta ? [] : contactTodo(ctx));
 }
 
@@ -251,19 +252,19 @@ function buildContactCard(section: string, _page: PlannedPage, ctx: PageCtx): Se
   const body: ContentField[] = [];
   const todos: string[] = [];
 
-  if (contact.phone) body.push(briefField(`Telefoon: ${contact.phone}`));
+  if (contact.phone) body.push(briefField(`Phone: ${contact.phone}`));
   else todos.push("TODO: add a phone number for the contact card.");
 
-  if (contact.email) body.push(briefField(`E-mail: ${contact.email}`));
+  if (contact.email) body.push(briefField(`Email: ${contact.email}`));
   else todos.push("TODO: add an email address for the contact card.");
 
-  if (contact.address) body.push(briefField(`Adres: ${contact.address}`));
+  if (contact.address) body.push(briefField(`Address: ${contact.address}`));
   else todos.push("TODO: add a postal address for the contact card.");
 
   // Opening hours are a fact we never invent.
   todos.push("TODO: add opening hours if applicable — never invent these.");
 
-  return base(section, generated("Contactgegevens"), body, [], primaryCta(ctx), todos);
+  return base(section, generated("Contact details"), body, [], primaryCta(ctx), todos);
 }
 
 function buildLocationMap(section: string, _page: PlannedPage, ctx: PageCtx): SectionContent {
@@ -272,18 +273,18 @@ function buildLocationMap(section: string, _page: PlannedPage, ctx: PageCtx): Se
     ? []
     : ["TODO: a map needs a verified address; none was provided in the brief."];
   const body = contact.address
-    ? [briefField(`Vind ons op: ${contact.address}`)]
+    ? [briefField(`Find us at: ${contact.address}`)]
     : [placeholder("TODO: address required for the map embed.")];
-  return base(section, generated("Route & bereikbaarheid"), body, [], null, todos);
+  return base(section, generated("Directions & accessibility"), body, [], null, todos);
 }
 
 function buildServiceArea(section: string, _page: PlannedPage, ctx: PageCtx): SectionContent {
   const locations = ctx.brief.seo?.target_locations ?? [];
-  const body = [generated(`We zijn actief in en rond ${ctx.business.city}.`)];
+  const body = [generated(`We are active in and around ${ctx.business.city}.`)];
   const todos = locations.length
     ? []
     : ["TODO: confirm the full list of towns/areas served (service area)."];
-  return base(section, generated("Werkgebied"), body, [], null, todos);
+  return base(section, generated("Service area"), body, [], null, todos);
 }
 
 function buildRichText(section: string, page: PlannedPage, ctx: PageCtx): SectionContent {
@@ -298,16 +299,16 @@ function buildRichText(section: string, page: PlannedPage, ctx: PageCtx): Sectio
 function buildUtility(section: string, page: PlannedPage, ctx: PageCtx): SectionContent {
   const map: Record<string, { heading: string; todo: string }> = {
     privacy: {
-      heading: "Privacyverklaring",
-      todo: "TODO: insert the legally reviewed privacy statement (GDPR/AVG).",
+      heading: "Privacy policy",
+      todo: "TODO: insert the legally reviewed privacy statement (GDPR).",
     },
     cookies: {
-      heading: "Cookiebeleid",
+      heading: "Cookie policy",
       todo: "TODO: insert the cookie policy matching the active analytics/forms providers.",
     },
-    terms: { heading: "Voorwaarden", todo: "TODO: insert reviewed terms / disclaimer." },
+    terms: { heading: "Terms & conditions", todo: "TODO: insert reviewed terms / disclaimer." },
     "404": {
-      heading: "Pagina niet gevonden",
+      heading: "Page not found",
       todo: "TODO: none — friendly not-found copy can be generated.",
     },
   };
@@ -317,7 +318,7 @@ function buildUtility(section: string, page: PlannedPage, ctx: PageCtx): Section
   };
   const body =
     page.pageType === "404"
-      ? [generated("Deze pagina bestaat niet (meer). Gebruik het menu of ga terug naar de homepage.")]
+      ? [generated("This page does not exist (anymore). Use the menu or return to the homepage.")]
       : [placeholder(entry.todo)];
   const todos = page.pageType === "404" ? [] : [entry.todo];
   return base(section, generated(entry.heading), body, [], primaryCta(ctx), todos);
@@ -331,7 +332,7 @@ function buildMetaDescription(page: PlannedPage, ctx: PageCtx): ContentField {
   if (page.pageType === "home") {
     text = `${business.short_description} ${business.name} in ${business.city}.`;
   } else if (serviceName) {
-    text = `${serviceName} in ${business.city} bij ${business.name}. ${business.short_description}`;
+    text = `${serviceName} in ${business.city} at ${business.name}. ${business.short_description}`;
   } else {
     text = `${stripSuffix(page.title)} — ${business.name} in ${business.city}.`;
   }
@@ -340,11 +341,11 @@ function buildMetaDescription(page: PlannedPage, ctx: PageCtx): ContentField {
 
 function primaryCta(ctx: PageCtx): { label: string; href: string } | null {
   const { contact } = ctx.business;
-  if (contact.booking_url) return { label: "Maak een afspraak", href: contact.booking_url };
+  if (contact.booking_url) return { label: "Book an appointment", href: contact.booking_url };
   const contactPage = ctx.plan.pages.find((p) => p.pageType === "contact");
-  if (contactPage) return { label: "Neem contact op", href: contactPage.route };
-  if (contact.phone) return { label: `Bel ${contact.phone}`, href: `tel:${contact.phone}` };
-  if (contact.email) return { label: "Stuur een e-mail", href: `mailto:${contact.email}` };
+  if (contactPage) return { label: "Contact us", href: contactPage.route };
+  if (contact.phone) return { label: `Call ${contact.phone}`, href: `tel:${contact.phone}` };
+  if (contact.email) return { label: "Send an email", href: `mailto:${contact.email}` };
   return null;
 }
 
@@ -372,11 +373,12 @@ function sectionWordCount(s: SectionContent): number {
   return n;
 }
 
-/** Recover the service name for a `/diensten/{slug}/` route from the brief. */
-function serviceForRoute(route: string, brief: Brief): string | null {
-  const match = route.match(/^\/diensten\/(.+?)\/$/);
-  if (!match) return null;
-  const slug = match[1]!;
+/** Recover the service name for a service detail route from the brief. */
+function serviceForRoute(route: string, brief: Brief, plan: SitePlan): string | null {
+  const page = plan.pages.find((p) => p.route === route && p.pageType === "service");
+  if (!page) return null;
+  const slug = route.split("/").filter(Boolean).pop();
+  if (!slug) return null;
   return brief.business.services.find((s) => slugify(s) === slug) ?? null;
 }
 

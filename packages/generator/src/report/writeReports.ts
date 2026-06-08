@@ -28,6 +28,63 @@ export function writeReports(plan: SitePlan, outDir: string): WrittenReport[] {
   return written;
 }
 
+/**
+ * Write or refresh `missing-inputs.md`, merging plan-level gaps with content
+ * TODOs so every open gap lives in one report (no silent magic).
+ */
+export function writeMissingInputs(
+  plan: SitePlan,
+  contentTodos: string[],
+  outDir: string,
+): WrittenReport {
+  mkdirSync(outDir, { recursive: true });
+  const merged = mergeMissingInputs(plan.missingInputs, contentTodos);
+  const body = renderMissingInputs(plan, merged);
+  writeFileSync(join(outDir, "missing-inputs.md"), body.endsWith("\n") ? body : body + "\n");
+  return { file: "missing-inputs.md" };
+}
+
+/** De-duplicated union of brief gaps and content TODOs. */
+export function mergeMissingInputs(planMissing: string[], contentTodos: string[]): string[] {
+  const out = [...planMissing];
+  const seen = new Set(out);
+  for (const todo of contentTodos) {
+    const item = todo.startsWith("TODO:") ? todo : `TODO: ${todo}`;
+    if (!seen.has(item)) {
+      seen.add(item);
+      out.push(item);
+    }
+  }
+  return out;
+}
+
+function renderMissingInputs(plan: SitePlan, items: string[]): string {
+  const lines = [`# Missing inputs — ${plan.business}`, ""];
+  if (!items.length) {
+    lines.push("_None recorded._");
+  } else {
+    if (plan.missingInputs.length) {
+      lines.push("## From brief validation");
+      lines.push("");
+      for (const item of plan.missingInputs) lines.push(`- ${item}`);
+      lines.push("");
+    }
+    const contentOnly = items.filter((i) => !plan.missingInputs.includes(i));
+    if (contentOnly.length) {
+      lines.push("## From content generation");
+      lines.push("");
+      for (const item of contentOnly) lines.push(`- ${item}`);
+      lines.push("");
+    }
+    if (!plan.missingInputs.length && contentOnly.length === 0) {
+      for (const item of items) lines.push(`- ${item}`);
+      lines.push("");
+    }
+  }
+  if (lines[lines.length - 1] !== "") lines.push("");
+  return lines.join("\n");
+}
+
 function renderSitePlan(plan: SitePlan): string {
   const lines: string[] = [];
   lines.push(`# Site plan — ${plan.business}`);

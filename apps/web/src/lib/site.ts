@@ -2,6 +2,21 @@ import { existsSync, readFileSync } from "node:fs";
 import { dirname, isAbsolute, join, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 
+export type {
+  ContentSource,
+  ContentField,
+  ContentItem,
+  SectionContent,
+  OpenGraph,
+  PageSeo,
+  JsonLdNode,
+  PageContent,
+  SiteContent,
+  ResolvedTheme,
+} from "@pagekit/generator";
+
+import type { JsonLdNode, PageContent, ResolvedTheme, SiteContent } from "@pagekit/generator";
+
 /**
  * Build-time loaders for the generator's output. Astro page frontmatter runs in
  * Node during the static build, so we read `content.json` and `theme.json`
@@ -11,68 +26,6 @@ import { fileURLToPath } from "node:url";
  * relative to the repo root) to render a specific brief's output — e.g. an
  * example site committed under `examples/`.
  */
-
-export type ContentSource = "brief" | "generated" | "placeholder";
-
-export interface ContentField {
-  value: string;
-  source: ContentSource;
-}
-export interface ContentItem {
-  title: ContentField;
-  body: ContentField;
-  href?: string;
-}
-export interface SectionContent {
-  section: string;
-  heading: ContentField | null;
-  body: ContentField[];
-  items: ContentItem[];
-  cta: { label: string; href: string } | null;
-  todos: string[];
-}
-export interface OpenGraph {
-  title: string;
-  description: string;
-  type: string;
-  url: string | null;
-  siteName: string;
-  locale: string;
-}
-export interface PageSeo {
-  canonical: string;
-  canonicalAbsolute: boolean;
-  robots: string;
-  openGraph: OpenGraph;
-}
-export type JsonLdNode = Record<string, unknown>;
-export interface PageContent {
-  route: string;
-  pageType: string;
-  title: string;
-  metaDescription: ContentField;
-  seo: PageSeo;
-  jsonLd: JsonLdNode[];
-  sections: SectionContent[];
-  wordCount: number;
-  minWords: number;
-  todos: string[];
-}
-export interface SiteContent {
-  business: string;
-  language: string;
-  mode: string;
-  siteUrl: string | null;
-  pages: PageContent[];
-  todos: string[];
-}
-
-export interface ResolvedTheme {
-  name: string;
-  cssVariables: Record<string, string>;
-  fonts: { heading: string; body: string };
-  motion: string;
-}
 
 const thisDir = dirname(fileURLToPath(import.meta.url));
 const repoRoot = resolve(thisDir, "../../../../"); // apps/web/src/lib → repo root
@@ -110,7 +63,25 @@ export function themeRootCss(theme: ResolvedTheme): string {
   return `:root {\n${decls}\n}`;
 }
 
-/** Convert a page route (`/diensten/echo-s/`) to an Astro slug (`diensten/echo-s`). */
+/** Serialize JSON-LD safely for embedding in a `<script>` tag. */
+export function safeJsonLd(node: JsonLdNode): string {
+  return JSON.stringify(node).replace(/</g, "\\u003c");
+}
+
+/** Whether a page includes a hero section (which owns the sole `<h1>`). */
+export function pageHasHero(page: PageContent): boolean {
+  return page.sections.some((s) => s.section.split(".")[0] === "hero");
+}
+
+/** Heading level for a section: `<h1>` on hero or the first section when no hero. */
+export function sectionHeadingLevel(page: PageContent, sectionIndex: number): "h1" | "h2" {
+  const base = page.sections[sectionIndex]?.section.split(".")[0];
+  if (base === "hero") return "h1";
+  if (!pageHasHero(page) && sectionIndex === 0) return "h1";
+  return "h2";
+}
+
+/** Convert a page route (`/services/echo-s/`) to an Astro slug (`services/echo-s`). */
 export function routeToSlug(route: string): string | undefined {
   const trimmed = route.replace(/^\/+|\/+$/g, "");
   return trimmed === "" ? undefined : trimmed;
